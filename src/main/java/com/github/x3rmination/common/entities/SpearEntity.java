@@ -1,6 +1,8 @@
 package com.github.x3rmination.common.entities;
 
+import com.github.x3rmination.core.registry.EntityInit;
 import net.minecraft.enchantment.EnchantmentHelper;
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityType;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.projectile.AbstractArrowEntity;
@@ -20,7 +22,7 @@ public class SpearEntity extends AbstractArrowEntity {
     }
 
     public SpearEntity(World worldIn, LivingEntity shooter, ItemStack thrownStackIn) {
-        super(EntityType.TRIDENT, shooter, worldIn);
+        super(EntityInit.SPEAR.get(), shooter, worldIn);
         this.thrownStack = thrownStackIn.copy();
     }
 

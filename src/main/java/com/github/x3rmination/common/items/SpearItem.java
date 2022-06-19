@@ -1,36 +1,28 @@
 package com.github.x3rmination.common.items;
 
-import com.github.x3rmination.common.entities.SpearEntity;
 import com.google.common.collect.ImmutableMultimap;
 import com.google.common.collect.Multimap;
 import net.minecraft.block.BlockState;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.ai.attributes.Attribute;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.entity.player.PlayerEntity;
-import net.minecraft.entity.projectile.AbstractArrowEntity;
-import net.minecraft.entity.projectile.TridentEntity;
 import net.minecraft.inventory.EquipmentSlotType;
-import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
-import net.minecraft.item.UseAction;
+import net.minecraft.item.*;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
-import net.minecraft.util.SoundCategory;
-import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-public class SpearItem extends Item implements IVanishable {
+public class SpearItem extends TieredItem implements IVanishable {
 
     private final Multimap<Attribute, AttributeModifier> spearAttributes;
     private final int useDuration;
 
-    public SpearItem(Properties builderIn, float baseDamage, int useDuration) {
-        super(builderIn);
+    public SpearItem(IItemTier tier, Properties properties, float baseDamage, int useDuration) {
+        super(tier, properties);
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(ATTACK_DAMAGE_MODIFIER, "Tool modifier", baseDamage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(ATTACK_SPEED_MODIFIER, "Tool modifier", -2.9F, AttributeModifier.Operation.ADDITION));
@@ -53,20 +45,20 @@ public class SpearItem extends Item implements IVanishable {
         if (entityLiving instanceof PlayerEntity) {
             PlayerEntity playerentity = (PlayerEntity) entityLiving;
             int charge = this.getUseDuration(stack) - timeLeft;
-            if(charge > 100 && !worldIn.isRemote) {
-                stack.damageItem(1, playerentity, player -> player.sendBreakAnimation(entityLiving.getActiveHand()));
-
-                SpearEntity spearEntity = new SpearEntity(worldIn, playerentity, stack);
-                spearEntity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 2.5F * 0.5F, 1.0F);
-                if (playerentity.abilities.isCreativeMode) {
-                    spearEntity.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
-                }
-
-                worldIn.addEntity(spearEntity);
-                if (!playerentity.abilities.isCreativeMode) {
-                    playerentity.inventory.deleteStack(stack);
-                }
-            }
+//            if(charge > 5 && !worldIn.isRemote) {
+//                stack.damageItem(1, playerentity, player -> player.sendBreakAnimation(entityLiving.getActiveHand()));
+//
+//                SpearEntity spearEntity = new SpearEntity(worldIn, playerentity, stack);
+//                spearEntity.setDirectionAndMovement(playerentity, playerentity.rotationPitch, playerentity.rotationYaw, 0.0F, 2.5F * 0.5F, 1.0F);
+//                if (playerentity.abilities.isCreativeMode) {
+//                    spearEntity.pickupStatus = AbstractArrowEntity.PickupStatus.CREATIVE_ONLY;
+//                }
+//
+//                worldIn.addEntity(spearEntity);
+//                if (!playerentity.abilities.isCreativeMode) {
+//                    playerentity.inventory.deleteStack(stack);
+//                }
+//            }
         }
     }
 
@@ -112,5 +104,6 @@ public class SpearItem extends Item implements IVanishable {
     public int getItemEnchantability() {
         return 1;
     }
+
 
 }
