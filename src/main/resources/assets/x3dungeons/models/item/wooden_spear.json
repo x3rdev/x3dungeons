@@ -1,5 +1,6 @@
 {
 	"credit": "Made with Blockbench",
+	"parent": "builtin",
 	"texture_size": [32, 32],
 	"textures": {
 		"0": "x3dungeons:item/wooden_spear",
@@ -489,6 +490,14 @@
 		}
 	],
 	"gui_light": "front",
+	"overrides": [
+		{
+			"predicate": {
+				"x3dungeons:throwing": 0.75
+			},
+			"model": "x3dungeons:item/wooden_spear_throwing"
+		}
+	],
 	"display": {
 		"thirdperson_righthand": {
 			"rotation": [135, 90, -90]

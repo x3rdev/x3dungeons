@@ -1,15 +1,24 @@
 package com.github.x3rmination;
 
+import com.github.x3rmination.common.entities.SpearEntity;
 import com.github.x3rmination.common.entities.renderer.SpearRenderer;
+import com.github.x3rmination.common.items.SpearItem;
 import com.github.x3rmination.core.registry.EntityInit;
 import com.github.x3rmination.core.registry.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.EntityRendererManager;
+import net.minecraft.entity.EntityType;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
@@ -55,12 +64,21 @@ public class X3DUNGEONS {
         // some preinit code
         LOGGER.info("HELLO FROM PREINIT");
         LOGGER.info("DIRT BLOCK >> {}", Blocks.DIRT.getRegistryName());
+
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
 
         LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SPEAR.get(), SpearRenderer::new);
+        event.enqueueWork(() -> {
+            for(RegistryObject<Item> registryObject : ItemInit.ITEMS.getEntries()) {
+                if(registryObject.get() instanceof SpearItem) {
+                    ItemModelsProperties.registerProperty(registryObject.get(), new ResourceLocation(X3DUNGEONS.MOD_ID, "throwing"),
+                            (stack, world, entity) -> entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0F : 0.0F);
+                }
+            }
+        });
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {

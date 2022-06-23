@@ -3,8 +3,8 @@
 	"parent": "builtin",
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "x3dungeons:item/golden_spear",
-		"particle": "x3dungeons:item/golden_spear"
+		"0": "x3dungeons:item/netherite_spear",
+		"particle": "x3dungeons:item/netherite_spear"
 	},
 	"elements": [
 		{
@@ -490,20 +490,12 @@
 		}
 	],
 	"gui_light": "front",
-	"overrides": [
-		{
-			"predicate": {
-				"x3dungeons:throwing": 0.75
-			},
-			"model": "x3dungeons:item/golden_spear_throwing"
-		}
-	],
 	"display": {
 		"thirdperson_righthand": {
-			"rotation": [135, 90, -90]
+			"rotation": [135, 90, 90]
 		},
 		"thirdperson_lefthand": {
-			"rotation": [45, -90, 0]
+			"rotation": [45, -90, -180]
 		},
 		"firstperson_righthand": {
 			"rotation": [0, -90, 25],
