@@ -1,6 +1,5 @@
 package com.github.x3rmination.common.entities.SkeletonGladiator;
 
-import net.minecraft.block.Blocks;
 import net.minecraft.entity.*;
 import net.minecraft.entity.ai.attributes.AttributeModifierMap;
 import net.minecraft.entity.ai.attributes.Attributes;
@@ -13,19 +12,29 @@ import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.Items;
 import net.minecraft.nbt.CompoundNBT;
-import net.minecraft.util.SoundEvent;
+import net.minecraft.world.Difficulty;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.IServerWorld;
 import net.minecraft.world.World;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.time.LocalDate;
-import java.time.temporal.ChronoField;
-import java.util.Random;
 
-public class SkeletonGladiatorEntity extends CreatureEntity {
+public class SkeletonGladiatorEntity extends CreatureEntity implements IAnimatable {
+
+    private AnimationFactory animationFactory = new AnimationFactory(this);
+    private AnimationController animationController = new AnimationController(this, "controller", 0, this::predicate);
+
     public SkeletonGladiatorEntity(EntityType<? extends SkeletonGladiatorEntity> type, World world) {
         super(type, world);
+        this.noCulling = true;
+
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
@@ -44,9 +53,7 @@ public class SkeletonGladiatorEntity extends CreatureEntity {
         this.goalSelector.addGoal(6, new LookAtGoal(this, PlayerEntity.class, 8.0F));
         this.goalSelector.addGoal(6, new LookRandomlyGoal(this));
         this.targetSelector.addGoal(1, new HurtByTargetGoal(this));
-        this.targetSelector.addGoal(2, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, IronGolemEntity.class, true));
-        this.targetSelector.addGoal(3, new NearestAttackableTargetGoal<>(this, TurtleEntity.class, 10, true, false, TurtleEntity.BABY_ON_LAND_SELECTOR));
+        this.targetSelector.addGoal(4, new NearestAttackableTargetGoal<>(this, PlayerEntity.class, true));
     }
 
     @Override
@@ -81,7 +88,7 @@ public class SkeletonGladiatorEntity extends CreatureEntity {
     @Override
     protected void populateDefaultEquipmentSlots(DifficultyInstance pDifficulty) {
         this.setItemSlot(EquipmentSlotType.OFFHAND, new ItemStack(Items.SHIELD));
-        if(Math.floor(Math.random()) > 0.7) {
+        if(pDifficulty.getDifficulty() == Difficulty.HARD && Math.random() > 0.7) {
             this.setItemSlot(EquipmentSlotType.HEAD, new ItemStack(Items.DIAMOND_HELMET));
             this.setItemSlot(EquipmentSlotType.CHEST, new ItemStack(Items.DIAMOND_CHESTPLATE));
             this.setItemSlot(EquipmentSlotType.LEGS, new ItemStack(Items.DIAMOND_LEGGINGS));
@@ -106,8 +113,28 @@ public class SkeletonGladiatorEntity extends CreatureEntity {
         this.populateDefaultEquipmentSlots(pDifficulty);
         this.populateDefaultEquipmentEnchantments(pDifficulty);
 //        this.reassessWeaponGoal();
-        this.setCanPickUpLoot(this.random.nextFloat() < 0.55F * pDifficulty.getSpecialMultiplier());
-
+        this.setCanPickUpLoot(this.random.nextFloat() < 0.45F * pDifficulty.getSpecialMultiplier());
         return pSpawnData;
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(animationController);
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.animationFactory;
+    }
+
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+        event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skeleton_gladiator.walk", true));
+        return PlayState.CONTINUE;
+    }
+
+    @Override
+    public void tick() {
+        this.animationController.setAnimation();
+        super.tick();
     }
 }

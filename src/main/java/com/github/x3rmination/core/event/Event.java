@@ -13,4 +13,5 @@ public class Event {
     public static void addEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(EntityInit.SKELETON_GLADIATOR.get(), SkeletonGladiatorEntity.setCustomAttributes().build());
     }
+
 }

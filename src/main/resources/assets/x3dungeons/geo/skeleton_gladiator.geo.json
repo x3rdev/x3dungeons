@@ -1,0 +1,85 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.unknown",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 2,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "rightArm",
+					"pivot": [5, 24, 0]
+				},
+				{
+					"name": "rightbicep",
+					"parent": "rightArm",
+					"pivot": [5, 18, 0],
+					"cubes": [
+						{"origin": [4, 12, -1], "size": [2, 6, 2], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "rightforearm",
+					"parent": "rightArm",
+					"pivot": [5, 24, 0],
+					"cubes": [
+						{"origin": [4, 18, -1], "size": [2, 6, 2], "uv": [32, 32]}
+					]
+				},
+				{
+					"name": "leftArm",
+					"pivot": [-5, 24, 0]
+				},
+				{
+					"name": "leftbicep",
+					"parent": "leftArm",
+					"pivot": [-5, 17, 0],
+					"cubes": [
+						{"origin": [-6, 12, -1], "size": [2, 6, 2], "uv": [24, 0]}
+					]
+				},
+				{
+					"name": "leftforearm",
+					"parent": "leftArm",
+					"pivot": [-5, 24, 0],
+					"cubes": [
+						{"origin": [-6, 18, -1], "size": [2, 6, 2], "uv": [34, 14]}
+					]
+				},
+				{
+					"name": "head",
+					"pivot": [0, 28, 0],
+					"cubes": [
+						{"origin": [-4, 24, -4], "size": [8, 8, 8], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "leftLeg",
+					"pivot": [-2, 12, 0],
+					"cubes": [
+						{"origin": [-3, 0, -1], "size": [2, 12, 2], "uv": [32, 0]}
+					]
+				},
+				{
+					"name": "rightLeg",
+					"pivot": [2, 12, 0],
+					"cubes": [
+						{"origin": [1, 0, -1], "size": [2, 12, 2], "uv": [0, 32]}
+					]
+				},
+				{
+					"name": "body",
+					"pivot": [0, 18, 0],
+					"cubes": [
+						{"origin": [-4, 12, -2], "size": [8, 12, 4], "uv": [0, 16]}
+					]
+				}
+			]
+		}
+	]
+}

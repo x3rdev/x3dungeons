@@ -8,6 +8,8 @@ import com.github.x3rmination.core.registry.EntityInit;
 import com.github.x3rmination.core.registry.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
+import net.minecraft.client.renderer.RenderType;
+import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
@@ -75,7 +77,6 @@ public class X3DUNGEONS {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SKELETON_GLADIATOR.get(), SkeletonGladiatorRenderer::new);
 
         event.enqueueWork(() -> {
-
             for(RegistryObject<Item> registryObject : ItemInit.ITEMS.getEntries()) {
                 if(registryObject.get() instanceof SpearItem) {
                     ItemModelsProperties.register(registryObject.get(), new ResourceLocation(X3DUNGEONS.MOD_ID, "throwing"),
