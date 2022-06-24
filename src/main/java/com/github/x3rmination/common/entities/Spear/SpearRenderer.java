@@ -1,8 +1,5 @@
-package com.github.x3rmination.common.entities.renderer;
+package com.github.x3rmination.common.entities.Spear;
 
-import com.github.x3rmination.X3DUNGEONS;
-import com.github.x3rmination.common.entities.SpearEntity;
-import com.github.x3rmination.common.entities.model.SpearModel;
 import com.github.x3rmination.common.items.SpearItem;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
@@ -28,21 +25,21 @@ public class SpearRenderer extends EntityRenderer<SpearEntity> {
 
     @Override
     public void render(SpearEntity entityIn, float entityYaw, float partialTicks, MatrixStack matrixStackIn, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        SpearItem item = (SpearItem) (entityIn.getArrowStack().getItem());
+        SpearItem item = (SpearItem) (entityIn.getPickupItem().getItem());
         SpearModel spearModel = new SpearModel(item.getTier());
-        matrixStackIn.push();
-        matrixStackIn.rotate(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationYaw, entityIn.rotationYaw) - 90.0F));
-        matrixStackIn.rotate(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.prevRotationPitch, entityIn.rotationPitch) + 90.0F));
-        IVertexBuilder ivertexbuilder = ItemRenderer.getEntityGlintVertexBuilder(bufferIn, spearModel.getRenderType(this.getEntityTexture(entityIn)), false, false);
-        spearModel.render(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
-        matrixStackIn.pop();
+        matrixStackIn.pushPose();
+        matrixStackIn.mulPose(Vector3f.YP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.yRotO, entityIn.yRot) - 90.0F));
+        matrixStackIn.mulPose(Vector3f.ZP.rotationDegrees(MathHelper.lerp(partialTicks, entityIn.xRotO, entityIn.xRot) + 90.0F));
+        IVertexBuilder ivertexbuilder = ItemRenderer.getFoilBufferDirect(bufferIn, spearModel.renderType(this.getTextureLocation(entityIn)), false, entityIn.isEnchanted());
+        spearModel.renderToBuffer(matrixStackIn, ivertexbuilder, packedLightIn, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 1.0F);
+        matrixStackIn.popPose();
         super.render(entityIn, entityYaw, partialTicks, matrixStackIn, bufferIn, packedLightIn);
     }
 
 
 
     @Override
-    public ResourceLocation getEntityTexture(SpearEntity entity) {
-        return new ResourceLocation(Objects.requireNonNull(entity.getArrowStack().getItem().getCreatorModId(entity.getArrowStack())), "textures/entity/" + entity.getItemTier().toString().toLowerCase() + "_spear.png");
+    public ResourceLocation getTextureLocation(SpearEntity entity) {
+        return new ResourceLocation(Objects.requireNonNull(entity.getPickupItem().getItem().getCreatorModId(entity.getPickupItem())), "textures/entity/" + entity.getItemTier().toString().toLowerCase() + "_spear.png");
     }
 }

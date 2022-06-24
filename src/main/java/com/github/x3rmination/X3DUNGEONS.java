@@ -1,15 +1,13 @@
 package com.github.x3rmination;
 
-import com.github.x3rmination.common.entities.SpearEntity;
-import com.github.x3rmination.common.entities.renderer.SpearRenderer;
+import com.github.x3rmination.common.entities.SkeletonGladiator.SkeletonGladiatorRenderer;
+import com.github.x3rmination.common.entities.Spear.SpearRenderer;
 import com.github.x3rmination.common.items.SpearItem;
+import com.github.x3rmination.core.registry.EnchantmentInit;
 import com.github.x3rmination.core.registry.EntityInit;
 import com.github.x3rmination.core.registry.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.entity.EntityRendererManager;
-import net.minecraft.entity.EntityType;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
@@ -56,6 +54,10 @@ public class X3DUNGEONS {
         // Entities
         EntityInit.ENTITIES.register(modEventBus);
 
+        // Enchantments
+        EnchantmentInit.ENCHANTMENTS.register(modEventBus);
+
+
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
     }
@@ -69,13 +71,15 @@ public class X3DUNGEONS {
 
     private void doClientStuff(final FMLClientSetupEvent event) {
 
-        LOGGER.info("Got game settings {}", event.getMinecraftSupplier().get().gameSettings);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SPEAR.get(), SpearRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.SKELETON_GLADIATOR.get(), SkeletonGladiatorRenderer::new);
+
         event.enqueueWork(() -> {
+
             for(RegistryObject<Item> registryObject : ItemInit.ITEMS.getEntries()) {
                 if(registryObject.get() instanceof SpearItem) {
-                    ItemModelsProperties.registerProperty(registryObject.get(), new ResourceLocation(X3DUNGEONS.MOD_ID, "throwing"),
-                            (stack, world, entity) -> entity != null && entity.isHandActive() && entity.getActiveItemStack() == stack ? 1.0F : 0.0F);
+                    ItemModelsProperties.register(registryObject.get(), new ResourceLocation(X3DUNGEONS.MOD_ID, "throwing"),
+                            (stack, world, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
                 }
             }
         });
