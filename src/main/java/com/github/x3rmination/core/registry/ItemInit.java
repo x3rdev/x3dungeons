@@ -1,6 +1,8 @@
 package com.github.x3rmination.core.registry;
 
 import com.github.x3rmination.X3DUNGEONS;
+import com.github.x3rmination.client.ister.AncientSwordISTER;
+import com.github.x3rmination.common.items.AncientSword.AncientSwordItem;
 import com.github.x3rmination.common.items.SpearItem;
 import net.minecraft.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -30,8 +32,11 @@ public class ItemInit {
     public static final RegistryObject<Item> NETHERITE_SPEAR = ITEMS.register("netherite_spear",
             () -> new SpearItem(ItemTier.NETHERITE, (new Item.Properties()).tab(ModItemTab.instance).durability(250), 6));
 
+    public static final RegistryObject<Item> ANCIENT_SWORD = ITEMS.register("ancient_sword",
+            () -> new AncientSwordItem(new Item.Properties().tab(ModItemTab.instance).durability(1000).fireResistant().setISTER(() -> AncientSwordISTER::new)));
+
     public static final RegistryObject<Item> SKELETON_GLADIATOR_SPAWN_EGG = ITEMS.register("skeleton_gladiator_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityInit.SKELETON_GLADIATOR, 0xc4c4c4, 0xebce2a, (new Item.Properties()).tab(ModItemTab.instance)));
+            () -> new ForgeSpawnEggItem(EntityInit.GLADIATOR_SKELETON, 0xc4c4c4, 0xebce2a, (new Item.Properties()).tab(ModItemTab.instance)));
 
     public static class ModItemTab extends ItemGroup {
         public static final ModItemTab instance = new ModItemTab(ItemGroup.TABS.length, X3DUNGEONS.MOD_ID);
@@ -45,4 +50,6 @@ public class ItemInit {
             return new ItemStack(WOODEN_SPEAR.get());
         }
     }
+
+
 }

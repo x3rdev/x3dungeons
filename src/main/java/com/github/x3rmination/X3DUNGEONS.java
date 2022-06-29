@@ -1,6 +1,6 @@
 package com.github.x3rmination;
 
-import com.github.x3rmination.common.entities.SkeletonGladiator.SkeletonGladiatorRenderer;
+import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonRenderer;
 import com.github.x3rmination.common.entities.Spear.SpearRenderer;
 import com.github.x3rmination.common.items.SpearItem;
 import com.github.x3rmination.core.registry.EnchantmentInit;
@@ -8,8 +8,6 @@ import com.github.x3rmination.core.registry.EntityInit;
 import com.github.x3rmination.core.registry.ItemInit;
 import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
-import net.minecraft.client.renderer.RenderType;
-import net.minecraft.client.renderer.RenderTypeLookup;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
@@ -74,7 +72,7 @@ public class X3DUNGEONS {
     private void doClientStuff(final FMLClientSetupEvent event) {
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SPEAR.get(), SpearRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityInit.SKELETON_GLADIATOR.get(), SkeletonGladiatorRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.GLADIATOR_SKELETON.get(), GladiatorSkeletonRenderer::new);
 
         event.enqueueWork(() -> {
             for(RegistryObject<Item> registryObject : ItemInit.ITEMS.getEntries()) {

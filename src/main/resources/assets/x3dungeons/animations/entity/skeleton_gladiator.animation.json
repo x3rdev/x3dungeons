@@ -1,61 +1,282 @@
 {
 	"format_version": "1.8.0",
 	"animations": {
-		"animation.skeleton_gladiator.walk": {
-			"loop": true,
-			"animation_length": 0.8,
+		"animation.skeleton_gladiator.idle": {
+			"animation_length": 2.08,
 			"bones": {
-				"rightArm": {
+				"bipedRightArm": {
 					"rotation": {
 						"0.0": {
-							"vector": [10, 0, 0]
+							"vector": [0, 0, -2.5]
 						},
-						"0.4": {
-							"vector": [-10, 0, 0],
+						"0.52": {
+							"vector": [2.5, 0, -2.5],
+							"easing": "easeInSine"
+						},
+						"1.04": {
+							"vector": [0, 0, -2.5],
+							"easing": "easeInSine"
+						},
+						"1.56": {
+							"vector": [-2.5, 0, -2],
+							"easing": "easeInSine"
+						},
+						"2.08": {
+							"vector": [0, 0, -2.5],
+							"easing": "easeInSine"
+						}
+					}
+				},
+				"bipedLeftArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 2.5]
+						},
+						"0.52": {
+							"vector": [-2.5, 0, 2.5],
+							"easing": "easeInSine"
+						},
+						"1.04": {
+							"vector": [0, 0, 2.5],
+							"easing": "easeInSine"
+						},
+						"1.56": {
+							"vector": [2.5, 0, 2],
 							"easing": "linear"
 						},
-						"0.8": {
-							"vector": [10, 0, 0]
+						"2.08": {
+							"vector": [0, 0, 2.5],
+							"easing": "easeInSine"
 						}
 					}
 				},
-				"leftArm": {
+				"bipedHead": {
+					"rotation": {
+						"vector": [0, 0, 0]
+					}
+				}
+			}
+		},
+		"animation.skeleton_gladiator.walk": {
+			"loop": true,
+			"animation_length": 1.2,
+			"bones": {
+				"bipedRightArm": {
 					"rotation": {
 						"0.0": {
-							"vector": [-10, 0, 0]
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
 						},
 						"0.4": {
-							"vector": [10, 0, 0]
+							"vector": [25, 0, 0],
+							"easing": "easeInSine"
 						},
 						"0.8": {
-							"vector": [-10, 0, 0]
+							"vector": [-25, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.2": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
 						}
 					}
 				},
-				"leftLeg": {
+				"bipedLeftArm": {
 					"rotation": {
 						"0.0": {
-							"vector": [10, 0, 0]
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
 						},
 						"0.4": {
-							"vector": [-10, 0, 0]
+							"vector": [-25, 0, 0],
+							"easing": "easeInSine"
 						},
 						"0.8": {
-							"vector": [10, 0, 0]
+							"vector": [25, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.2": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
 						}
 					}
 				},
-				"rightLeg": {
+				"bipedLeftLeg": {
 					"rotation": {
 						"0.0": {
-							"vector": [-10, 0, 0]
+							"vector": [0, 0, 0],
+							"easing": "easeInQuad"
 						},
 						"0.4": {
-							"vector": [10, 0, 0]
+							"vector": [35, 0, 0],
+							"easing": "easeInSine"
 						},
 						"0.8": {
-							"vector": [-10, 0, 0]
+							"vector": [-35, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.2": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
 						}
+					}
+				},
+				"bipedRightLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						},
+						"0.4": {
+							"vector": [-35, 0, 0],
+							"easing": "easeInSine"
+						},
+						"0.8": {
+							"vector": [35, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.2": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						}
+					}
+				}
+			}
+		},
+		"animation.skeleton_gladiator.chase": {
+			"loop": true,
+			"animation_length": 1.12,
+			"bones": {
+				"bipedRightArm": {
+					"rotation": {
+						"vector": [-180, 0, 0],
+						"easing": "easeInElastic"
+					}
+				},
+				"bipedLeftArm": {
+					"rotation": {
+						"vector": [-75, 25, 0]
+					}
+				},
+				"bipedLeftLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInQuad"
+						},
+						"0.32": {
+							"vector": [35, 0, 0],
+							"easing": "easeInSine"
+						},
+						"0.72": {
+							"vector": [-35, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.12": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						}
+					}
+				},
+				"bipedRightLeg": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						},
+						"0.32": {
+							"vector": [-35, 0, 0],
+							"easing": "easeInSine"
+						},
+						"0.72": {
+							"vector": [35, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.12": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						}
+					}
+				}
+			}
+		},
+		"animation.skeleton_gladiator.attack0": {
+			"animation_length": 0.72,
+			"bones": {
+				"bipedRightArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-180, 0, 0],
+							"easing": "easeInElastic"
+						},
+						"0.16": {
+							"vector": [-90, 0, 0],
+							"easing": "easeInElastic"
+						},
+						"0.72": {
+							"vector": [-180, 0, 0],
+							"easing": "easeInSine"
+						}
+					}
+				},
+				"bipedLeftArm": {
+					"rotation": {
+						"vector": [-55, 25, 0],
+						"easing": "step"
+					}
+				}
+			}
+		},
+		"animation.skeleton_gladiator.attack1": {
+			"animation_length": 0.72,
+			"bones": {
+				"bipedRightArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-180, 0, 0],
+							"easing": "easeInElastic"
+						},
+						"0.12": {
+							"vector": [-145, 0, 0],
+							"easing": "easeInSine"
+						},
+						"0.4": {
+							"vector": [-122.5, 0, 0],
+							"easing": "easeInElastic"
+						},
+						"0.72": {
+							"vector": [-180, 0, 0],
+							"easing": "easeInSine"
+						}
+					}
+				},
+				"bipedLeftArm": {
+					"rotation": {
+						"0.0": {
+							"vector": [-55, 25, 0],
+							"easing": "step"
+						},
+						"0.12": {
+							"vector": [-56, -20, -30.3195],
+							"easing": "step"
+						}
+					}
+				}
+			}
+		},
+		"animation.skeleton_gladiator.idle_chase": {
+			"loop": true,
+			"animation_length": 0.04,
+			"bones": {
+				"bipedRightArm": {
+					"rotation": {
+						"vector": [-180, 0, 0],
+						"easing": "easeInElastic"
+					}
+				},
+				"bipedLeftArm": {
+					"rotation": {
+						"vector": [-75, 25, 0]
 					}
 				}
 			}

@@ -12,71 +12,127 @@
 			},
 			"bones": [
 				{
-					"name": "rightArm",
-					"pivot": [5, 24, 0]
-				},
-				{
-					"name": "rightbicep",
-					"parent": "rightArm",
-					"pivot": [5, 18, 0],
-					"cubes": [
-						{"origin": [4, 12, -1], "size": [2, 6, 2], "uv": [0, 0]}
-					]
-				},
-				{
-					"name": "rightforearm",
-					"parent": "rightArm",
-					"pivot": [5, 24, 0],
-					"cubes": [
-						{"origin": [4, 18, -1], "size": [2, 6, 2], "uv": [32, 32]}
-					]
-				},
-				{
-					"name": "leftArm",
-					"pivot": [-5, 24, 0]
-				},
-				{
-					"name": "leftbicep",
-					"parent": "leftArm",
-					"pivot": [-5, 17, 0],
-					"cubes": [
-						{"origin": [-6, 12, -1], "size": [2, 6, 2], "uv": [24, 0]}
-					]
-				},
-				{
-					"name": "leftforearm",
-					"parent": "leftArm",
+					"name": "bipedRightArm",
 					"pivot": [-5, 24, 0],
 					"cubes": [
-						{"origin": [-6, 18, -1], "size": [2, 6, 2], "uv": [34, 14]}
+						{"origin": [-6, 12, -1], "size": [2, 6, 2], "uv": [0, 0]},
+						{"origin": [-6, 18, -1], "size": [2, 6, 2], "uv": [24, 16]}
 					]
 				},
 				{
-					"name": "head",
+					"name": "armorBipedRightArm",
+					"parent": "bipedRightArm",
+					"pivot": [-5, 23, 0],
+					"cubes": [
+						{"origin": [-7, 12, -2], "size": [4, 12, 4], "uv": [40, 0]}
+					]
+				},
+				{
+					"name": "bipedHandRight",
+					"parent": "bipedRightArm",
+					"pivot": [-5, 12, 0],
+					"cubes": [
+						{"origin": [-5, 12, -0.5], "size": [0, 0, 1], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "bipedLeftArm",
+					"pivot": [5, 24, 0],
+					"cubes": [
+						{"origin": [4, 18, -1], "size": [2, 6, 2], "uv": [24, 24]},
+						{"origin": [4, 12, -1], "size": [2, 6, 2], "uv": [24, 0]}
+					]
+				},
+				{
+					"name": "armorBipedLeftArm",
+					"parent": "bipedLeftArm",
+					"pivot": [5, 23, 0],
+					"cubes": [
+						{"origin": [3, 12, -2], "size": [4, 12, 4], "uv": [40, 0]}
+					]
+				},
+				{
+					"name": "bipedHandLeft",
+					"parent": "bipedLeftArm",
+					"pivot": [5, 12, 0],
+					"cubes": [
+						{"origin": [5, 12, 0], "size": [0, 0, 0], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "bipedHead",
 					"pivot": [0, 28, 0],
 					"cubes": [
 						{"origin": [-4, 24, -4], "size": [8, 8, 8], "uv": [0, 0]}
 					]
 				},
 				{
-					"name": "leftLeg",
+					"name": "armorBipedHead",
+					"parent": "bipedHead",
+					"pivot": [0, 24, 0],
+					"cubes": [
+						{"origin": [-4, 24, -4], "size": [8, 8, 8], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "bipedLeftLeg",
 					"pivot": [-2, 12, 0],
 					"cubes": [
 						{"origin": [-3, 0, -1], "size": [2, 12, 2], "uv": [32, 0]}
 					]
 				},
 				{
-					"name": "rightLeg",
-					"pivot": [2, 12, 0],
+					"name": "armorBipedLeftLeg",
+					"parent": "bipedLeftLeg",
+					"pivot": [-2, 12, 0],
 					"cubes": [
-						{"origin": [1, 0, -1], "size": [2, 12, 2], "uv": [0, 32]}
+						{"origin": [-4, 0, -2], "size": [4, 12, 4], "uv": [40, 0]}
 					]
 				},
 				{
-					"name": "body",
+					"name": "armorBipedLeftFoot",
+					"parent": "bipedLeftLeg",
+					"pivot": [-2, 12, 0],
+					"cubes": [
+						{"origin": [-4, 0, -2], "size": [4, 12, 4], "uv": [40, 0]}
+					]
+				},
+				{
+					"name": "bipedRightLeg",
+					"pivot": [2, 12, 0],
+					"cubes": [
+						{"origin": [1, 0, -1], "size": [2, 12, 2], "uv": [32, 18]}
+					]
+				},
+				{
+					"name": "armorBipedRightLeg",
+					"parent": "bipedRightLeg",
+					"pivot": [2, 12, 0],
+					"cubes": [
+						{"origin": [0, 0, -2], "size": [4, 12, 4], "uv": [40, 0]}
+					]
+				},
+				{
+					"name": "armorBipedRightFoot",
+					"parent": "bipedRightLeg",
+					"pivot": [2, 12, 0],
+					"cubes": [
+						{"origin": [0, 0, -2], "size": [4, 12, 4], "uv": [40, 0]}
+					]
+				},
+				{
+					"name": "bipedBody",
 					"pivot": [0, 18, 0],
 					"cubes": [
 						{"origin": [-4, 12, -2], "size": [8, 12, 4], "uv": [0, 16]}
+					]
+				},
+				{
+					"name": "armorBipedBody",
+					"parent": "bipedBody",
+					"pivot": [0, 23, 0],
+					"cubes": [
+						{"origin": [-4, 17, -2], "size": [8, 12, 4], "uv": [40, 0]}
 					]
 				}
 			]
