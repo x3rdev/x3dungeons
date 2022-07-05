@@ -1,0 +1,27 @@
+{
+	"format_version": "1.8.0",
+	"animations": {
+		"animation.model.takeOutItem": {
+			"animation_length": 0.72,
+			"bones": {
+				"sword": {
+					"rotation": {
+						"0.0": {
+							"vector": [0, 0, 0],
+							"easing": "easeInSine"
+						},
+						"0.36": {
+							"vector": [0, 0, -90],
+							"easing": "easeInSine"
+						},
+						"0.72": {
+							"vector": [0, 0, -360],
+							"easing": "easeInSine"
+						}
+					}
+				}
+			}
+		}
+	},
+	"geckolib_format_version": 2
+}

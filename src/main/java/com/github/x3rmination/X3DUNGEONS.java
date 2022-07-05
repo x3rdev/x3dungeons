@@ -1,5 +1,7 @@
 package com.github.x3rmination;
 
+import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonEntity;
+import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonRenderer;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonRenderer;
 import com.github.x3rmination.common.entities.Spear.SpearRenderer;
 import com.github.x3rmination.common.items.SpearItem;
@@ -73,6 +75,7 @@ public class X3DUNGEONS {
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SPEAR.get(), SpearRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.GLADIATOR_SKELETON.get(), GladiatorSkeletonRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.ANCIENT_SKELETON.get(), AncientSkeletonRenderer::new);
 
         event.enqueueWork(() -> {
             for(RegistryObject<Item> registryObject : ItemInit.ITEMS.getEntries()) {

@@ -50,9 +50,20 @@ ordering = "NONE"
 side = "BOTH"
 # Here's another dependency
 [[dependencies.x3dungeons]]
-modId = "minecraft"
-mandatory = true
-# This version range declares a minimum of the current minecraft version up to but not including the next major version
-versionRange = "[1.16.5,1.17)"
-ordering = "NONE"
-side = "BOTH"
+    modId = "minecraft"
+    mandatory = true
+    versionRange = "[1.16.5,1.17)"
+    ordering = "NONE"
+    side = "BOTH"
+[[dependencies.x3dungeons]]
+    modId="forge"
+    mandatory=true
+    versionRange="[36.1.0,)"
+    ordering="NONE"
+    side="BOTH"
+[[dependencies.x3dungeons]]
+    modId = "geckolib3"
+    mandatory = true
+    versionRange = "[3.0.79,)"
+    ordering = "NONE"
+    side = "BOTH"

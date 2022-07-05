@@ -15,17 +15,17 @@ public class GladiatorSkeletonModel extends AnimatedGeoModel {
 
     @Override
     public ResourceLocation getModelLocation(Object object) {
-        return new ResourceLocation(X3DUNGEONS.MOD_ID, "geo/skeleton_gladiator.geo.json");
+        return new ResourceLocation(X3DUNGEONS.MOD_ID, "geo/gladiator_skeleton.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(Object object) {
-        return new ResourceLocation(X3DUNGEONS.MOD_ID, "textures/entity/skeleton_gladiator.png");
+        return new ResourceLocation(X3DUNGEONS.MOD_ID, "textures/entity/gladiator_skeleton.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(Object animatable) {
-        return new ResourceLocation(X3DUNGEONS.MOD_ID, "animations/entity/skeleton_gladiator.animation.json");
+        return new ResourceLocation(X3DUNGEONS.MOD_ID, "animations/entity/gladiator_skeleton.animation.json");
     }
 
     @Override

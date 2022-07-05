@@ -29,7 +29,6 @@ import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 import javax.annotation.Nullable;
-import java.util.Random;
 
 public class GladiatorSkeletonEntity extends MonsterEntity implements IAnimatable {
 
@@ -121,7 +120,7 @@ public class GladiatorSkeletonEntity extends MonsterEntity implements IAnimatabl
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "idle_controller", 4, this::predicate));
+        data.addAnimationController(new AnimationController(this, "controller", 4, this::predicate));
     }
 
     @Override
@@ -151,31 +150,6 @@ public class GladiatorSkeletonEntity extends MonsterEntity implements IAnimatabl
         }
         event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.skeleton_gladiator.idle", true));
         return PlayState.CONTINUE;
-    }
-
-    @Override
-    protected void customServerAiStep() {
-        boolean flag = this.isSunBurnTick();
-        if (flag) {
-            ItemStack itemstack = this.getItemBySlot(EquipmentSlotType.HEAD);
-            if (!itemstack.isEmpty()) {
-                if (itemstack.isDamageableItem()) {
-                    itemstack.setDamageValue(itemstack.getDamageValue() + this.random.nextInt(2));
-                    if (itemstack.getDamageValue() >= itemstack.getMaxDamage()) {
-                        this.broadcastBreakEvent(EquipmentSlotType.HEAD);
-                        this.setItemSlot(EquipmentSlotType.HEAD, ItemStack.EMPTY);
-                    }
-                }
-
-                flag = false;
-            }
-
-            if (flag) {
-                this.setSecondsOnFire(8);
-            }
-        }
-
-        super.customServerAiStep();
     }
 
     @Override

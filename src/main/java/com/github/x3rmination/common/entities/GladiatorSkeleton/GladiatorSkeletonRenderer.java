@@ -27,19 +27,15 @@ public class GladiatorSkeletonRenderer extends ExtendedGeoEntityRenderer<Gladiat
 
     public GladiatorSkeletonRenderer(EntityRendererManager rendererManager) {
         super(rendererManager, new GladiatorSkeletonModel());
-//        GeckoLibCache.getInstance().parser.register(new Variable("gladiator.xRot", 0));
-
     }
 
     @Override
     public RenderType getRenderType(GladiatorSkeletonEntity animatable, float partialTicks, MatrixStack stack, @Nullable IRenderTypeBuffer renderTypeBuffer, @Nullable IVertexBuilder vertexBuilder, int packedLightIn, ResourceLocation textureLocation) {
-        return RenderType.entityCutoutNoCull(new ResourceLocation(X3DUNGEONS.MOD_ID, "textures/entity/skeleton_gladiator.png"));
+        return RenderType.entityCutoutNoCull(new ResourceLocation(X3DUNGEONS.MOD_ID, "textures/entity/gladiator_skeleton.png"));
     }
 
     @Override
     public void render(GladiatorSkeletonEntity entity, float entityYaw, float partialTicks, MatrixStack stack, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        GeckoLibCache.getInstance().parser.setValue("x_rotation", entity.getViewXRot(1));
-        GeckoLibCache.getInstance().parser.setValue("y_rotation", entity.yHeadRot - entity.yRot);
         super.render(entity, entityYaw, partialTicks, stack, bufferIn, packedLightIn);
     }
 
@@ -155,7 +151,6 @@ public class GladiatorSkeletonRenderer extends ExtendedGeoEntityRenderer<Gladiat
 
     @Override
     protected void preRenderItem(MatrixStack matrixStack, ItemStack item, String boneName, GladiatorSkeletonEntity currentEntity, IBone bone) {
-
         if (item == this.mainHand || item == this.offHand) {
             matrixStack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
             matrixStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
