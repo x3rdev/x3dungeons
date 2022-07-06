@@ -1,5 +1,6 @@
 package com.github.x3rmination.common.items.AncientSword;
 
+import com.github.x3rmination.common.entities.SweepProjectile.SweepProjectileEntity;
 import com.github.x3rmination.common.items.ItemTiers;
 import net.minecraft.enchantment.IVanishable;
 import net.minecraft.entity.LivingEntity;
@@ -7,6 +8,7 @@ import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.SwordItem;
+import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.world.World;
@@ -59,6 +61,37 @@ public class AncientSwordItem extends SwordItem implements IVanishable, IAnimata
             final PacketDistributor.PacketTarget target = PacketDistributor.TRACKING_ENTITY_AND_SELF.with(() -> player);
             GeckoLibNetwork.syncAnimation(target, this, id, 0);
         }
-        return super.use(world, player, hand);
+        ItemStack itemstack = player.getItemInHand(hand);
+        if (itemstack.getDamageValue() >= itemstack.getMaxDamage() - 1) {
+            return ActionResult.fail(itemstack);
+        } else {
+            player.startUsingItem(hand);
+            return ActionResult.consume(itemstack);
+        }
     }
+
+    @Override
+    public void releaseUsing(ItemStack pStack, World pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
+        int useTime = this.getUseDuration(pStack) - pTimeLeft;
+        float usePercentage =  ((float) useTime) / this.getUseDuration(pStack);
+        SweepProjectileEntity sweepEntity = new SweepProjectileEntity(pEntityLiving, pLevel);
+        sweepEntity.shootFromRotation(pEntityLiving, pEntityLiving.xRot, pEntityLiving.yRot, 0, 2 * usePercentage, 0);
+        sweepEntity.setNoGravity(true);
+        sweepEntity.setDamage(4);
+        pLevel.addFreshEntity(sweepEntity);
+        if(pEntityLiving instanceof PlayerEntity) ((PlayerEntity) pEntityLiving).getCooldowns().addCooldown(this, 10);
+        super.releaseUsing(pStack, pLevel, pEntityLiving, pTimeLeft);
+    }
+
+    @Override
+    public UseAction getUseAnimation(ItemStack pStack) {
+        return UseAction.BOW;
+    }
+
+    @Override
+    public int getUseDuration(ItemStack pStack) {
+        return 50;
+    }
+
+
 }

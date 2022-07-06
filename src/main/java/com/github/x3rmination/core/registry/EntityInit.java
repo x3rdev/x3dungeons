@@ -4,6 +4,7 @@ import com.github.x3rmination.X3DUNGEONS;
 import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonEntity;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonEntity;
 import com.github.x3rmination.common.entities.Spear.SpearEntity;
+import com.github.x3rmination.common.entities.SweepProjectile.SweepProjectileEntity;
 import net.minecraft.entity.EntityClassification;
 import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
@@ -32,4 +33,11 @@ public class EntityInit {
                     .sized(1.2F, 4F)
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(X3DUNGEONS.MOD_ID, "ancient_skeleton").toString()));
+
+    public static final RegistryObject<EntityType<SweepProjectileEntity>> SWEEP_PROJECTILE = ENTITIES.register("sweep_projectile",
+            () -> EntityType.Builder.<SweepProjectileEntity>of(SweepProjectileEntity::new, EntityClassification.MISC)
+                    .sized(2F, 0.5F)
+                    .clientTrackingRange(4)
+                    .updateInterval(20)
+                    .build(new ResourceLocation(X3DUNGEONS.MOD_ID, "sweep_projectile").toString()));
 }

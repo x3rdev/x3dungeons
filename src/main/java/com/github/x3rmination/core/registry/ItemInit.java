@@ -3,6 +3,7 @@ package com.github.x3rmination.core.registry;
 import com.github.x3rmination.X3DUNGEONS;
 import com.github.x3rmination.common.items.AncientSword.AncientSwordItem;
 import com.github.x3rmination.common.items.AncientSword.AncientSwordRenderer;
+import com.github.x3rmination.common.items.AutomaticBow.WoodenAutomaticBowItem;
 import com.github.x3rmination.common.items.SpearItem;
 import net.minecraft.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
@@ -15,22 +16,25 @@ public class ItemInit {
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, X3DUNGEONS.MOD_ID);
 
     public static final RegistryObject<Item> WOODEN_SPEAR = ITEMS.register("wooden_spear",
-            () -> new SpearItem(ItemTier.WOOD, (new Item.Properties()).tab(ModItemTab.instance).durability(250), 1));
+            () -> new SpearItem(ItemTier.WOOD, (new Item.Properties()).tab(ModItemTab.instance)));
 
     public static final RegistryObject<Item> STONE_SPEAR = ITEMS.register("stone_spear",
-            () -> new SpearItem(ItemTier.STONE, (new Item.Properties()).tab(ModItemTab.instance).durability(250), 2));
+            () -> new SpearItem(ItemTier.STONE, (new Item.Properties()).tab(ModItemTab.instance)));
 
     public static final RegistryObject<Item> GOLDEN_SPEAR = ITEMS.register("golden_spear",
-            () -> new SpearItem(ItemTier.GOLD, (new Item.Properties()).tab(ModItemTab.instance).durability(250), 3));
+            () -> new SpearItem(ItemTier.GOLD, (new Item.Properties()).tab(ModItemTab.instance)));
 
     public static final RegistryObject<Item> IRON_SPEAR = ITEMS.register("iron_spear",
-            () -> new SpearItem(ItemTier.IRON, (new Item.Properties()).tab(ModItemTab.instance).durability(250), 4));
+            () -> new SpearItem(ItemTier.IRON, (new Item.Properties()).tab(ModItemTab.instance)));
 
     public static final RegistryObject<Item> DIAMOND_SPEAR = ITEMS.register("diamond_spear",
-            () -> new SpearItem(ItemTier.DIAMOND, (new Item.Properties()).tab(ModItemTab.instance).durability(250), 5));
+            () -> new SpearItem(ItemTier.DIAMOND, (new Item.Properties()).tab(ModItemTab.instance)));
 
     public static final RegistryObject<Item> NETHERITE_SPEAR = ITEMS.register("netherite_spear",
-            () -> new SpearItem(ItemTier.NETHERITE, (new Item.Properties()).tab(ModItemTab.instance).durability(250), 6));
+            () -> new SpearItem(ItemTier.NETHERITE, (new Item.Properties()).tab(ModItemTab.instance)));
+
+    public static final RegistryObject<Item> WOODEN_AUTOMATIC_BOW = ITEMS.register("wooden_automatic_bow",
+            () -> new WoodenAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.WOOD.getUses())));
 
     // ADD EPIC FIGHT MOD INTEGRATION, AVAILABLE ON CURSEFORGE PAGE
 

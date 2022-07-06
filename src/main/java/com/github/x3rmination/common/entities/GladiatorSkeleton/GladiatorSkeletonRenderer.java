@@ -34,11 +34,6 @@ public class GladiatorSkeletonRenderer extends ExtendedGeoEntityRenderer<Gladiat
         return RenderType.entityCutoutNoCull(new ResourceLocation(X3DUNGEONS.MOD_ID, "textures/entity/gladiator_skeleton.png"));
     }
 
-    @Override
-    public void render(GladiatorSkeletonEntity entity, float entityYaw, float partialTicks, MatrixStack stack, IRenderTypeBuffer bufferIn, int packedLightIn) {
-        super.render(entity, entityYaw, partialTicks, stack, bufferIn, packedLightIn);
-    }
-
     @Nullable
     @Override
     protected ItemStack getArmorForBone(String boneName, GladiatorSkeletonEntity currentEntity) {

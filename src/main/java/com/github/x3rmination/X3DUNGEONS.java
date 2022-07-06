@@ -4,6 +4,7 @@ import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonEnt
 import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonRenderer;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonRenderer;
 import com.github.x3rmination.common.entities.Spear.SpearRenderer;
+import com.github.x3rmination.common.entities.SweepProjectile.SweepProjectileRenderer;
 import com.github.x3rmination.common.items.SpearItem;
 import com.github.x3rmination.core.registry.EnchantmentInit;
 import com.github.x3rmination.core.registry.EntityInit;
@@ -74,6 +75,7 @@ public class X3DUNGEONS {
     private void doClientStuff(final FMLClientSetupEvent event) {
 
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SPEAR.get(), SpearRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.SWEEP_PROJECTILE.get(), SweepProjectileRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.GLADIATOR_SKELETON.get(), GladiatorSkeletonRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.ANCIENT_SKELETON.get(), AncientSkeletonRenderer::new);
 

@@ -37,7 +37,6 @@ public class GladiatorSkeletonEntity extends MonsterEntity implements IAnimatabl
 
     public GladiatorSkeletonEntity(EntityType<? extends GladiatorSkeletonEntity> type, World world) {
         super(type, world);
-        this.noCulling = true;
     }
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {

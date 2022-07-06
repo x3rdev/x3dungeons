@@ -59,7 +59,7 @@
 		},
 		"animation.skeleton_gladiator.walk": {
 			"loop": true,
-			"animation_length": 1.2,
+			"animation_length": 0.8,
 			"bones": {
 				"bipedRightArm": {
 					"rotation": {
@@ -73,10 +73,6 @@
 						},
 						"0.8": {
 							"vector": [-25, 0, 0],
-							"easing": "easeInSine"
-						},
-						"1.2": {
-							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						}
 					}
@@ -94,10 +90,6 @@
 						"0.8": {
 							"vector": [25, 0, 0],
 							"easing": "easeInSine"
-						},
-						"1.2": {
-							"vector": [0, 0, 0],
-							"easing": "easeInSine"
 						}
 					}
 				},
@@ -113,10 +105,6 @@
 						},
 						"0.8": {
 							"vector": [-35, 0, 0],
-							"easing": "easeInSine"
-						},
-						"1.2": {
-							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						}
 					}
@@ -134,11 +122,24 @@
 						"0.8": {
 							"vector": [35, 0, 0],
 							"easing": "easeInSine"
-						},
-						"1.2": {
-							"vector": [0, 0, 0],
-							"easing": "easeInSine"
 						}
+					}
+				}
+			}
+		},
+		"animation.skeleton_gladiator.idle_chase": {
+			"loop": true,
+			"animation_length": 0.04,
+			"bones": {
+				"bipedRightArm": {
+					"rotation": {
+						"vector": [-180, 0, 0],
+						"easing": "easeInElastic"
+					}
+				},
+				"bipedLeftArm": {
+					"rotation": {
+						"vector": [-75, 25, 0]
 					}
 				}
 			}
@@ -260,23 +261,6 @@
 							"vector": [-56, -20, -30.3195],
 							"easing": "step"
 						}
-					}
-				}
-			}
-		},
-		"animation.skeleton_gladiator.idle_chase": {
-			"loop": true,
-			"animation_length": 0.04,
-			"bones": {
-				"bipedRightArm": {
-					"rotation": {
-						"vector": [-180, 0, 0],
-						"easing": "easeInElastic"
-					}
-				},
-				"bipedLeftArm": {
-					"rotation": {
-						"vector": [-75, 25, 0]
 					}
 				}
 			}

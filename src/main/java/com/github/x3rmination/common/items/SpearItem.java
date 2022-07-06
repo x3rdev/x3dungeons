@@ -31,14 +31,13 @@ public class SpearItem extends TieredItem implements IVanishable {
     private final Multimap<Attribute, AttributeModifier> spearAttributes;
     private final int maxUseDuration;
 
-    public SpearItem(IItemTier tier, Properties properties, float baseDamage) {
-        super(tier, properties);
+    public SpearItem(IItemTier tier, Properties properties) {
+        super(tier, properties.durability(tier.getUses()));
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
         builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", tier.getAttackDamageBonus() + 5, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", -2.9F, AttributeModifier.Operation.ADDITION));
         this.maxUseDuration = 10000;
         this.spearAttributes = builder.build();
-
     }
 
     @Override
@@ -133,4 +132,6 @@ public class SpearItem extends TieredItem implements IVanishable {
         }
         return super.canApplyAtEnchantingTable(stack, enchantment);
     }
+
+
 }
