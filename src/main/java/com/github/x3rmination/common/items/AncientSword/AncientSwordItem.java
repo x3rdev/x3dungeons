@@ -11,6 +11,8 @@ import net.minecraft.item.SwordItem;
 import net.minecraft.item.UseAction;
 import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
+import net.minecraft.util.SoundCategory;
+import net.minecraft.util.SoundEvents;
 import net.minecraft.world.World;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.fml.network.PacketDistributor;
@@ -79,6 +81,7 @@ public class AncientSwordItem extends SwordItem implements IVanishable, IAnimata
         sweepEntity.setNoGravity(true);
         sweepEntity.setDamage(4);
         pLevel.addFreshEntity(sweepEntity);
+        pLevel.playSound(null, pEntityLiving.blockPosition(), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundCategory.HOSTILE ,6, 3F);
         if(pEntityLiving instanceof PlayerEntity) ((PlayerEntity) pEntityLiving).getCooldowns().addCooldown(this, 10);
         super.releaseUsing(pStack, pLevel, pEntityLiving, pTimeLeft);
     }

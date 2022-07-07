@@ -151,7 +151,6 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
     public void tick() {
         super.tick();
         if(Boolean.TRUE.equals(this.entityData.get(PERFORM_ATTACK_0_ANIM)) || Boolean.TRUE.equals(this.entityData.get(PERFORM_ATTACK_1_ANIM)) || Boolean.TRUE.equals(this.entityData.get(PERFORM_ATTACK_2_ANIM))) {
-//            this.setDeltaMovement(0, 0, 0);
             this.navigation.stop();
         }
     }
@@ -293,7 +292,7 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
                 if(nextAttack == 0) {
                     if(distance < 4)  {
                         this.entity.level.playSound(null, this.entity.blockPosition(), SoundEvents.PLAYER_ATTACK_KNOCKBACK, SoundCategory.HOSTILE ,10, 1F);
-                        target.hurt(DamageSource.mobAttack(this.entity),  5+ Math.round(this.entity.random.nextGaussian() * 10));
+                        target.hurt(DamageSource.mobAttack(this.entity),  5 + (float) Math.round(this.entity.random.nextGaussian() * 10));
                     } else {
                         this.entity.level.playSound(null, this.entity.blockPosition(), SoundEvents.PLAYER_ATTACK_NODAMAGE, SoundCategory.HOSTILE ,10, 0.8F);
                     }
@@ -314,7 +313,7 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
                     sweepEntity.setNoGravity(true);
                     sweepEntity.setDamage(4);
                     this.entity.level.addFreshEntity(sweepEntity);
-                    this.entity.level.playSound(null, this.entity.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundCategory.HOSTILE ,8, 0.5F);
+                    this.entity.level.playSound(null, this.entity.blockPosition(), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundCategory.HOSTILE ,8, 3F);
                 }
                 nextAttack = -1;
             }

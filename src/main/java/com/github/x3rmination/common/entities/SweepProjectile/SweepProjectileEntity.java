@@ -45,7 +45,7 @@ public class SweepProjectileEntity extends AbstractArrowEntity implements IAnima
         Entity entity = pResult.getEntity();
         entity.hurt(DamageSource.MAGIC, this.damage);
         entity.setDeltaMovement(this.getDeltaMovement().scale(0.9));
-        pResult.getEntity().level.playSound(null, entity.blockPosition(), SoundEvents.FIRE_EXTINGUISH, SoundCategory.HOSTILE, 2F, 1.5F);
+        pResult.getEntity().level.playSound(null, entity.blockPosition(), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundCategory.HOSTILE, 2F, 3F);
     }
 
     @Override

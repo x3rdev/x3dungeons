@@ -5,7 +5,9 @@ import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonRen
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonRenderer;
 import com.github.x3rmination.common.entities.Spear.SpearRenderer;
 import com.github.x3rmination.common.entities.SweepProjectile.SweepProjectileRenderer;
+import com.github.x3rmination.common.items.AutomaticBow.AutomaticBowItem;
 import com.github.x3rmination.common.items.SpearItem;
+import com.github.x3rmination.core.event.ModEvents;
 import com.github.x3rmination.core.registry.EnchantmentInit;
 import com.github.x3rmination.core.registry.EntityInit;
 import com.github.x3rmination.core.registry.ItemInit;
@@ -13,6 +15,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
+import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.RegistryEvent;
@@ -63,6 +66,7 @@ public class X3DUNGEONS {
 
         // Register ourselves for server and other game events we are interested in
         MinecraftForge.EVENT_BUS.register(this);
+        MinecraftForge.EVENT_BUS.register(new ModEvents());
     }
 
     private void setup(final FMLCommonSetupEvent event) {
@@ -84,6 +88,17 @@ public class X3DUNGEONS {
                 if(registryObject.get() instanceof SpearItem) {
                     ItemModelsProperties.register(registryObject.get(), new ResourceLocation(X3DUNGEONS.MOD_ID, "throwing"),
                             (stack, world, entity) -> entity != null && entity.isUsingItem() && entity.getUseItem() == stack ? 1.0F : 0.0F);
+                }
+                if(registryObject.get() instanceof AutomaticBowItem) {
+                    ItemModelsProperties.register(registryObject.get(), new ResourceLocation(X3DUNGEONS.MOD_ID, "pull"), (stack, world, livingEntity) -> {
+                        if (livingEntity == null) {
+                            return 0.0F;
+                        } else {
+                            AutomaticBowItem item = ((AutomaticBowItem) stack.getItem());
+                            return livingEntity.getUseItem() != stack ? 0.0F : (((float) item.getProgress())/ ((float) item.getThreshold()));
+                        }
+                    });
+                    ItemModelsProperties.register(registryObject.get(), new ResourceLocation(X3DUNGEONS.MOD_ID, "pulling"), (stack, world, livingEntity) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
                 }
             }
         });

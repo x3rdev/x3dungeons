@@ -1,0 +1,6 @@
+{
+  "parent": "item/bow",
+  "textures": {
+    "layer0": "x3dungeons:item/wooden_automatic_bow_pulling_0"
+  }
+}
