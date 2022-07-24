@@ -1,0 +1,15 @@
+{
+  "name": "x3dungeons:swag_dragon/left_wing_tail_pool",
+  "fallback": "minecraft:empty",
+  "elements": [
+    {
+      "weight": 1,
+      "element": {
+        "location": "x3dungeons:swag_dragon_left_wing_tail",
+        "processors": "minecraft:empty",
+        "projection": "rigid",
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

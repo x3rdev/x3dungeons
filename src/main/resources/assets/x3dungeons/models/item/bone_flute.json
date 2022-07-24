@@ -1,6 +1,15 @@
 {
-  "parent": "minecraft:item/handheld",
-  "textures": {
-    "layer0": "x3dungeons:item/bone_flute"
-  }
+	"credit": "Made with Blockbench",
+	"parent": "minecraft:item/handheld",
+	"textures": {
+		"layer0": "x3dungeons:item/bone_flute"
+	},
+	"overrides": [
+		{
+			"predicate": {
+				"x3dungeons:pulling": 1
+			},
+			"model": "x3dungeons:item/bone_flute_using"
+		}
+	]
 }

@@ -38,6 +38,7 @@ public class SweepProjectileEntity extends AbstractArrowEntity implements IAnima
 
     public SweepProjectileEntity(LivingEntity pShooter, World pLevel) {
         super(EntityInit.SWEEP_PROJECTILE.get(), pShooter, pLevel);
+//        this.setNoPhysics(true);
     }
 
     @Override

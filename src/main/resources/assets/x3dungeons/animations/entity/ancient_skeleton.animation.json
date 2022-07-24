@@ -330,7 +330,7 @@
 			}
 		},
 		"animation.ancient_skeleton.attack2": {
-			"animation_length": 1.44,
+			"animation_length": 1.6,
 			"bones": {
 				"all": {
 					"position": {

@@ -1,10 +1,10 @@
 package com.github.x3rmination.common.items.AutomaticBow;
 
+import net.minecraft.entity.Entity;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class AutomaticBowItem extends BowItem {
@@ -38,4 +38,8 @@ public class AutomaticBowItem extends BowItem {
         super.onUsingTick(stack, player, count);
     }
 
+    @Override
+    public void inventoryTick(ItemStack pStack, World pLevel, Entity pEntity, int pItemSlot, boolean pIsSelected) {
+        if(pEntity instanceof PlayerEntity && !((PlayerEntity) pEntity).isUsingItem()) ((PlayerEntity) pEntity).stopUsingItem();
+    }
 }

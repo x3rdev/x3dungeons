@@ -75,9 +75,10 @@ public class AncientSwordItem extends SwordItem implements IVanishable, IAnimata
     @Override
     public void releaseUsing(ItemStack pStack, World pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
         int useTime = this.getUseDuration(pStack) - pTimeLeft;
-        float usePercentage =  ((float) useTime) / this.getUseDuration(pStack);
+        if(useTime > 100) useTime = 100;
+        float usePercentage =  ((float) useTime) / 100;
         SweepProjectileEntity sweepEntity = new SweepProjectileEntity(pEntityLiving, pLevel);
-        sweepEntity.shootFromRotation(pEntityLiving, pEntityLiving.xRot, pEntityLiving.yRot, 0, 2 * usePercentage, 0);
+        sweepEntity.shootFromRotation(pEntityLiving, pEntityLiving.xRot, pEntityLiving.yRot, 0, 3 * usePercentage, 0);
         sweepEntity.setNoGravity(true);
         sweepEntity.setDamage(4);
         pLevel.addFreshEntity(sweepEntity);
@@ -93,7 +94,7 @@ public class AncientSwordItem extends SwordItem implements IVanishable, IAnimata
 
     @Override
     public int getUseDuration(ItemStack pStack) {
-        return 50;
+        return 72000;
     }
 
 

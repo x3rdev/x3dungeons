@@ -37,19 +37,19 @@ public class ItemInit {
             () -> new SpearItem(ItemTier.NETHERITE, (new Item.Properties()).tab(ModItemTab.instance)));
 
     public static final RegistryObject<Item> WOODEN_AUTOMATIC_BOW = ITEMS.register("wooden_automatic_bow",
-            () -> new WoodenAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.WOOD.getUses()), 100));
+            () -> new WoodenAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.WOOD.getUses()), 60));
 
     public static final RegistryObject<Item> STONE_AUTOMATIC_BOW = ITEMS.register("stone_automatic_bow",
-            () -> new StoneAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.STONE.getUses()), 80));
+            () -> new StoneAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.STONE.getUses()), 50));
 
     public static final RegistryObject<Item> GOlDEN_AUTOMATIC_BOW = ITEMS.register("golden_automatic_bow",
-            () -> new GoldenAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.GOLD.getUses()), 100));
+            () -> new GoldenAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.GOLD.getUses()), 60));
 
     public static final RegistryObject<Item> IRON_AUTOMATIC_BOW = ITEMS.register("iron_automatic_bow",
-            () -> new IronAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.IRON.getUses()), 60));
+            () -> new IronAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.IRON.getUses()), 40));
 
     public static final RegistryObject<Item> DIAMOND_AUTOMATIC_BOW = ITEMS.register("diamond_automatic_bow",
-            () -> new DiamondAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.DIAMOND.getUses()), 40));
+            () -> new DiamondAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.DIAMOND.getUses()), 30));
 
     public static final RegistryObject<Item> NETHERITE_AUTOMATIC_BOW = ITEMS.register("netherite_automatic_bow",
             () -> new NetheriteAutomaticBowItem(new Item.Properties().tab(ModItemTab.instance).durability(ItemTier.NETHERITE.getUses()), 20));
