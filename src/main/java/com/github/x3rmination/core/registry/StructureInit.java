@@ -1,6 +1,7 @@
 package com.github.x3rmination.core.registry;
 
 import com.github.x3rmination.X3DUNGEONS;
+import com.github.x3rmination.common.structures.StructureBase;
 import com.github.x3rmination.common.structures.SwagDragonStructure;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
@@ -20,12 +21,10 @@ public class StructureInit {
 
     public static final DeferredRegister<Structure<?>> STRUCTURES = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, X3DUNGEONS.MOD_ID);
 
-    public static final RegistryObject<Structure<NoFeatureConfig>> SWAG_DRAGON = STRUCTURES.register("swag_dragon", () -> (new SwagDragonStructure(NoFeatureConfig.CODEC)));
-
+    public static final RegistryObject<StructureBase<NoFeatureConfig>> SWAG_DRAGON = STRUCTURES.register("swag_dragon", SwagDragonStructure::new);
 
     public static void setupStructures() {
-        setupMapSpacingAndLand(
-                SWAG_DRAGON.get(), new StructureSeparationSettings(10,5, 678903142), false);
+        setupMapSpacingAndLand(SWAG_DRAGON.get(), new StructureSeparationSettings(20,10, 715238743), true);
     }
 
     public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {

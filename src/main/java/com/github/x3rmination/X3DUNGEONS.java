@@ -1,6 +1,5 @@
 package com.github.x3rmination;
 
-import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonEntity;
 import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonRenderer;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonRenderer;
 import com.github.x3rmination.common.entities.Spear.SpearRenderer;
@@ -12,13 +11,12 @@ import com.github.x3rmination.core.event.ModEvents;
 import com.github.x3rmination.core.registry.*;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
-import net.minecraft.block.Blocks;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
-import net.minecraft.item.Items;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.World;
+import net.minecraft.world.biome.Biome;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.FlatChunkGenerator;
 import net.minecraft.world.gen.feature.structure.Structure;
@@ -91,7 +89,7 @@ public class X3DUNGEONS {
     private void setup(final FMLCommonSetupEvent event) {
         event.enqueueWork(() -> {
             StructureInit.setupStructures();
-            ConfiguredStructureInit.registerConfiguredStructures();
+            StructureFeatureInit.registerConfiguredStructures();
         });
     }
 
@@ -167,7 +165,9 @@ public class X3DUNGEONS {
          * RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName()) to get the biome's
          * registrykey. Then that can be fed into the dictionary to get the biome's types.
          */
-        event.getGeneration().getStructures().add(() -> ConfiguredStructureInit.CONFIGURED_SWAG_DRAGON);
+        if(event.getCategory() == Biome.Category.JUNGLE && event.getScale() < 0.5) {
+            event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_SWAG_DRAGON);
+        }
     }
 
     private static Method GETCODEC_METHOD;

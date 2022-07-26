@@ -1,11 +1,11 @@
 {
-  "name": "x3dungeons:swag_dragon/start_pool",
+  "name": "x3dungeons:swag_dragon/start_middle_pool",
   "fallback": "minecraft:empty",
   "elements": [
     {
       "weight": 1,
       "element": {
-        "location": "x3dungeons:swag_dragon_head",
+        "location": "x3dungeons:swag_dragon_rib_front",
         "processors": "minecraft:empty",
         "projection": "rigid",
         "element_type": "minecraft:single_pool_element"
