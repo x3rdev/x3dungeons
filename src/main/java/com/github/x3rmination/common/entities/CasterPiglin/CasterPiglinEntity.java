@@ -11,6 +11,7 @@ import software.bernie.geckolib3.core.manager.AnimationFactory;
 
 public class CasterPiglinEntity extends PiglinEntity implements IAnimatable, IRangedAttackMob {
 
+    private AnimationFactory animationFactory = new AnimationFactory(this);
     public CasterPiglinEntity(EntityType<? extends AbstractPiglinEntity> entityType, World world) {
         super(entityType, world);
     }
@@ -22,6 +23,6 @@ public class CasterPiglinEntity extends PiglinEntity implements IAnimatable, IRa
 
     @Override
     public AnimationFactory getFactory() {
-        return null;
+        return animationFactory;
     }
 }
