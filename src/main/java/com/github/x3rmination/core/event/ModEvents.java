@@ -2,7 +2,10 @@ package com.github.x3rmination.core.event;
 
 import com.github.x3rmination.X3DUNGEONS;
 import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonEntity;
+import com.github.x3rmination.common.entities.CannonPiglin.CannonPiglinEntity;
+import com.github.x3rmination.common.entities.Floppa.FloppaEntity;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonEntity;
+import com.github.x3rmination.common.entities.LeanZombie.LeanZombieEntity;
 import com.github.x3rmination.common.items.BoneFlute.BoneFluteItem;
 import com.github.x3rmination.core.registry.EntityInit;
 import net.minecraft.client.Minecraft;
@@ -25,9 +28,13 @@ import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = X3DUNGEONS.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
 public class ModEvents {
+
     @SubscribeEvent
     public static void addEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(EntityInit.GLADIATOR_SKELETON.get(), GladiatorSkeletonEntity.setCustomAttributes().build());
         event.put(EntityInit.ANCIENT_SKELETON.get(), AncientSkeletonEntity.setCustomAttributes().build());
+        event.put(EntityInit.CANNON_PIGLIN.get(), CannonPiglinEntity.setCustomAttributes().build());
+        event.put(EntityInit.LEAN_ZOMBIE.get(), LeanZombieEntity.setCustomAttributes().build());
+        event.put(EntityInit.FLOPPA.get(), FloppaEntity.setCustomAttributes().build());
     }
 }

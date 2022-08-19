@@ -1,7 +1,10 @@
 package com.github.x3rmination;
 
 import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonRenderer;
+import com.github.x3rmination.common.entities.CannonPiglin.CannonPiglinRenderer;
+import com.github.x3rmination.common.entities.Floppa.FloppaRenderer;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonRenderer;
+import com.github.x3rmination.common.entities.LeanZombie.LeanZombieRenderer;
 import com.github.x3rmination.common.entities.Spear.SpearRenderer;
 import com.github.x3rmination.common.entities.SweepProjectile.SweepProjectileRenderer;
 import com.github.x3rmination.common.items.AutomaticBow.AutomaticBowItem;
@@ -43,6 +46,8 @@ import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import top.theillusivec4.curios.api.SlotTypeMessage;
+import top.theillusivec4.curios.api.SlotTypePreset;
 
 import java.lang.reflect.Method;
 import java.util.HashMap;
@@ -69,6 +74,7 @@ public class X3DUNGEONS {
 
         // Items
         ItemInit.ITEMS.register(modEventBus);
+        ItemInit.ARTIFACTS.register(modEventBus);
 
         // Entities
         EntityInit.ENTITIES.register(modEventBus);
@@ -99,6 +105,9 @@ public class X3DUNGEONS {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SWEEP_PROJECTILE.get(), SweepProjectileRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.GLADIATOR_SKELETON.get(), GladiatorSkeletonRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.ANCIENT_SKELETON.get(), AncientSkeletonRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.CANNON_PIGLIN.get(), CannonPiglinRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.LEAN_ZOMBIE.get(), LeanZombieRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.FLOPPA.get(), FloppaRenderer::new);
         event.enqueueWork(() -> {
             for(RegistryObject<Item> registryObject : ItemInit.ITEMS.getEntries()) {
                 if(registryObject.get() instanceof SpearItem) {
@@ -123,11 +132,7 @@ public class X3DUNGEONS {
     }
 
     private void enqueueIMC(final InterModEnqueueEvent event) {
-        // some example code to dispatch IMC to another mod
-        InterModComms.sendTo("x3dungeons", "helloworld", () -> {
-            LOGGER.info("Hello world from the MDK");
-            return "Hello world";
-        });
+        InterModComms.sendTo("curios", SlotTypeMessage.REGISTER_TYPE, () -> SlotTypePreset.CURIO.getMessageBuilder().build());
     }
 
     private void processIMC(final InterModProcessEvent event) {
@@ -165,8 +170,14 @@ public class X3DUNGEONS {
          * RegistryKey.getOrCreateKey(Registry.BIOME_KEY, event.getName()) to get the biome's
          * registrykey. Then that can be fed into the dictionary to get the biome's types.
          */
-        if(event.getCategory() == Biome.Category.JUNGLE && event.getScale() < 0.5) {
-            event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_SWAG_DRAGON);
+        if(event.getCategory() == Biome.Category.JUNGLE || event.getCategory() == Biome.Category.ICY) {
+            if (event.getScale() < 0.5) {
+                event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_SWAG_DRAGON);
+
+            }
+        }
+        if(event.getScale() < 0.5) {
+            event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_ZOMBIE_DUNGEON);
         }
     }
 
@@ -191,6 +202,7 @@ public class X3DUNGEONS {
 
             Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
             tempMap.putIfAbsent(StructureInit.SWAG_DRAGON.get(), DimensionStructuresSettings.DEFAULTS.get(StructureInit.SWAG_DRAGON.get()));
+            tempMap.putIfAbsent(StructureInit.ZOMBIE_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(StructureInit.ZOMBIE_DUNGEON.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }

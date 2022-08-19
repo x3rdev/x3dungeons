@@ -24,9 +24,12 @@ import net.minecraft.util.DamageSource;
 import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.AxisAlignedBB;
+import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.*;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
+import org.lwjgl.system.CallbackI;
+import org.w3c.dom.ranges.Range;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -88,8 +91,9 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
         this.setItemSlot(EquipmentSlotType.LEGS, legStack);
         this.setItemSlot(EquipmentSlotType.FEET, bootStack);
         this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemInit.ANCIENT_SWORD.get()));
-        this.setDropChance(EquipmentSlotType.MAINHAND, 2.0F);
+        this.setDropChance(EquipmentSlotType.MAINHAND, 0.0F);
     }
+
 
     @Nullable
     @Override
@@ -97,6 +101,7 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
         pSpawnData = super.finalizeSpawn(pLevel, pDifficulty, pReason, pSpawnData, pDataTag);
         this.populateDefaultEquipmentSlots(pDifficulty);
         this.setCanPickUpLoot(false);
+
         return pSpawnData;
     }
 
@@ -108,8 +113,7 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController(this, "controller", 4, this::predicate));
-        data.addAnimationController(new AnimationController(this, "walk_controller", 4, this::walk_predicate));
+        data.addAnimationController(new AnimationController(this, "controller", 5, this::predicate));
     }
 
     @Override
@@ -119,7 +123,6 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if(Boolean.TRUE.equals(this.entityData.get(PERFORM_ATTACK_0_ANIM))) {
-            this.getNavigation().stop();
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ancient_skeleton.attack0", false));
             return PlayState.CONTINUE;
         }
@@ -131,25 +134,14 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ancient_skeleton.attack2", false));
             return PlayState.CONTINUE;
         }
-        if(event.isMoving() && event.getController().getCurrentAnimation() == null) {
+        if(event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ancient_skeleton.walk", true));
+        } else {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ancient_skeleton.idle", true));
         }
         return PlayState.CONTINUE;
     }
 
-    private <E extends IAnimatable> PlayState walk_predicate(AnimationEvent<E> event) {
-        if (event.isMoving() && !isAttacking()){
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.ancient_skeleton.walk", true));
-            return PlayState.CONTINUE;
-        }
-        return PlayState.STOP;
-    }
-
-    private boolean isAttacking() {
-        if(Boolean.TRUE.equals(this.entityData.get(PERFORM_ATTACK_0_ANIM))) return true;
-        if(Boolean.TRUE.equals(this.entityData.get(PERFORM_ATTACK_1_ANIM))) return true;
-        return Boolean.TRUE.equals(this.entityData.get(PERFORM_ATTACK_2_ANIM));
-    }
 
     @Override
     protected void customServerAiStep() {
@@ -165,10 +157,6 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
                 serverWorld.sendParticles(new BlockParticleData(ParticleTypes.BLOCK, this.getBlockStateOn()), this.getX() + xModifier + j, this.getY() + 0.2, this.getZ() + zModifier + j, 10, 1, 1, 1, 1);
             }
         }
-    }
-
-    @Override
-    public void animateHurt() {
     }
 
     @Override
@@ -202,21 +190,19 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
 
     public class AncientSkeletonGoal extends Goal {
         private final AncientSkeletonEntity entity;
-        private static final int COOLDOWN_ATTACK0 = 70;
-        private static final int COOLDOWN_ATTACK1 = 400;
-        private static final int COOLDOWN_ATTACK2 = 200;
-        private int attack0Progress = 0;
-        private int attack1Progress = 0;
-        private int attack2Progress = 0;
-        private int pathRecalculation = 0;
-        private int timeUntilDamage;
-        private int nextAttack = -1;
-
-
+        private int pathDelay = 0;
+        private int cdAttack0 = 0;
+        private int cdAttack1 = 0;
+        private int cdAttack2 = 0;
+        private int cdMove0 = 0;
+        private int executionId = -1;
+        private int executionDelay = 0;
+        private int nextAttackDelay = 0;
+        private double distanceToTarget;
 
         public AncientSkeletonGoal(AncientSkeletonEntity entity) {
             this.entity = entity;
-            this.setFlags(EnumSet.of(Flag.MOVE, Flag.JUMP, Flag.LOOK, Flag.TARGET));
+            this.setFlags(EnumSet.of(Flag.MOVE, Flag.JUMP, Flag.LOOK));
         }
 
         @Override
@@ -227,49 +213,86 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
 
         @Override
         public void start() {
-            this.entity.getNavigation().moveTo(this.entity.getTarget(),1);
-            this.entity.setAggressive(true);
+            followTarget();
         }
 
         @Override
         public void stop() {
-            this.entity.setAggressive(false);
-            this.entity.getNavigation().stop();
+            this.entity.getNavigation().recomputePath();
         }
 
         @Override
         public void tick() {
             LivingEntity target = this.entity.getTarget();
-            if(target == null || !target.isAlive()) return;
-            double distance = this.entity.distanceTo(target);
-            this.entity.getLookControl().setLookAt(target, 30, 30);
-
-            if(pathRecalculation > 0) {
-                pathRecalculation--;
+            if(target == null || target.isDeadOrDying() || this.entity.level == null) return;
+            distanceToTarget = this.entity.distanceToSqr(target);
+            decreaseCoolDowns();
+            this.entity.lookControl.setLookAt(target, 30.0F, 30.0F);
+            if (executionId == -1 && --nextAttackDelay < 1) {
+                queueAttack();
             } else {
-                this.entity.getNavigation().stop();
-                this.entity.getNavigation().moveTo(this.entity.getTarget(), 1);
-                pathRecalculation = (int) (this.entity.getRandom().nextGaussian()*50);
+                if(--executionDelay < 1) {
+                    performAttack();
+                }
             }
+            if(--pathDelay < 1) {
+                followTarget();
+                pathDelay = 15;
+            }
+        }
 
-            if(attack0Progress < COOLDOWN_ATTACK0) attack0Progress++;
-            if(attack1Progress < COOLDOWN_ATTACK1) attack1Progress++;
-            if(attack2Progress < COOLDOWN_ATTACK2) attack2Progress++;
+        private void decreaseCoolDowns() {
+            cdAttack0--;
+            cdAttack1--;
+            cdAttack2--;
+            cdMove0--;
+        }
 
-            if(timeUntilDamage > 0) timeUntilDamage--;
-            if(timeUntilDamage == 0) {
-                timeUntilDamage = -1;
-                ServerWorld serverWorld = this.entity.level.getServer().getLevel(this.entity.level.dimension());
-                if(nextAttack == 0) {
-                    if(distance < 4)  {
+        private void followTarget() {
+            if(this.entity.getTarget() != null && executionId == -1) this.entity.getNavigation().moveTo(this.entity.getTarget(), 1);
+        }
+
+        private void queueAttack() {
+            if(distanceToTarget < 4 && cdAttack0 < 1) {
+                executionDelay = 28;
+                executionId = 0;
+                this.entity.entityData.set(PERFORM_ATTACK_0_ANIM, true);
+                this.entity.getNavigation().stop();
+
+            } else if(distanceToTarget < 7 && cdAttack1 < 1) {
+                executionDelay = 32;
+                executionId = 1;
+                this.entity.entityData.set(PERFORM_ATTACK_1_ANIM, true);
+                this.entity.getNavigation().stop();
+            } else if(distanceToTarget > 8 && cdAttack2 < 1) {
+                executionDelay = 32;
+                executionId = 2;
+                this.entity.entityData.set(PERFORM_ATTACK_2_ANIM, true);
+                this.entity.getNavigation().stop();
+            } else if(distanceToTarget > 5 && cdMove0 < 1 && this.entity.isInWater()) {
+                cdMove0 = 100;
+                BlockPos pos = this.entity.getTarget().blockPosition();
+                this.entity.teleportToWithTicket(pos.getX(), pos.getY(), pos.getZ());
+                this.entity.getNavigation().recomputePath();
+            } else {
+                followTarget();
+            }
+        }
+
+        private void performAttack() {
+            ServerWorld serverWorld = this.entity.level.getServer().getLevel(this.entity.level.dimension());
+            switch (executionId) {
+                case 0:
+                    if(distanceToTarget < 4)  {
                         this.entity.level.playSound(null, this.entity.blockPosition(), SoundEvents.PLAYER_ATTACK_KNOCKBACK, SoundCategory.HOSTILE ,10, 1F);
-                        target.hurt(DamageSource.mobAttack(this.entity),  5 + (float) Math.round(this.entity.random.nextGaussian() * 10));
+                        this.entity.getTarget().hurt(DamageSource.mobAttack(this.entity),  5 + (float) Math.round(this.entity.random.nextGaussian() * 10));
                     } else {
                         this.entity.level.playSound(null, this.entity.blockPosition(), SoundEvents.PLAYER_ATTACK_NODAMAGE, SoundCategory.HOSTILE ,10, 0.8F);
                     }
                     this.entity.entityData.set(PERFORM_ATTACK_0_ANIM, false);
-                }
-                if(nextAttack == 1) {
+                    cdAttack0 = 20;
+                    break;
+                case 1:
                     this.entity.level.playSound(null, this.entity.blockPosition(), SoundEvents.GILDED_BLACKSTONE_BREAK, SoundCategory.HOSTILE ,10, 0.8F);
                     spawnAttack1Particles(serverWorld);
                     AxisAlignedBB box = new AxisAlignedBB(this.entity.blockPosition().north(6).east(6).above(2), this.entity.blockPosition().south(6).west(6).below(2));
@@ -278,8 +301,9 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
                         areaEntity.hurt(DamageSource.mobAttack(this.entity), 20);
                     }
                     this.entity.entityData.set(PERFORM_ATTACK_1_ANIM, false);
-                }
-                if(nextAttack == 2) {
+                    cdAttack1 = 100;
+                    break;
+                case 2:
                     this.entity.setYBodyRot(this.entity.yHeadRot);
                     SweepProjectileEntity sweepEntity = new SweepProjectileEntity(this.entity, this.entity.level);
                     sweepEntity.shootFromRotation(this.entity, this.entity.xRot, this.entity.yHeadRot, 0, 2, 0);
@@ -288,32 +312,11 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
                     this.entity.level.addFreshEntity(sweepEntity);
                     this.entity.level.playSound(null, this.entity.blockPosition(), SoundEvents.FIREWORK_ROCKET_LAUNCH, SoundCategory.HOSTILE ,8, 3F);
                     this.entity.entityData.set(PERFORM_ATTACK_2_ANIM, false);
-                }
-                nextAttack = -1;
+                    cdAttack2 = 70;
+                    break;
+
             }
-            double rand = Math.random();
-            if(!isAttacking()) {
-                if (rand > 0.5) {
-                    if (distance < 4 && attack0Progress == COOLDOWN_ATTACK0 && nextAttack == -1) {
-                        this.entity.entityData.set(PERFORM_ATTACK_0_ANIM, true);
-                        timeUntilDamage = 28;
-                        attack0Progress = 0;
-                        nextAttack = 0;
-                        return;
-                    }
-                } else if (distance < 6 && attack1Progress == COOLDOWN_ATTACK1 && nextAttack == -1) {
-                    this.entity.entityData.set(PERFORM_ATTACK_1_ANIM, true);
-                    timeUntilDamage = 32;
-                    attack1Progress = 0;
-                    nextAttack = 1;
-                    return;
-                } else if (distance > 5 && attack2Progress == COOLDOWN_ATTACK2) {
-                    this.entity.entityData.set(PERFORM_ATTACK_2_ANIM, true);
-                    timeUntilDamage = 32;
-                    attack2Progress = 0;
-                    nextAttack = 2;
-                }
-            }
+            executionId = -1;
         }
     }
 }

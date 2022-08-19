@@ -6,6 +6,7 @@ import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.item.ItemUseContext;
 import net.minecraft.item.UseAction;
+import net.minecraft.particles.ParticleTypes;
 import net.minecraft.potion.EffectInstance;
 import net.minecraft.potion.Effects;
 import net.minecraft.util.*;
@@ -33,6 +34,8 @@ public class BoneFluteItem extends Item {
             if(entity instanceof LivingEntity) {
                 ((LivingEntity) entity).addEffect(new EffectInstance(Effects.CONFUSION, 150));
                 ((LivingEntity) entity).addEffect(new EffectInstance(Effects.MOVEMENT_SLOWDOWN, 100, 4));
+//                erroring???????
+//                entity.level.getServer().getLevel(entity.level.dimension()).sendParticles(ParticleTypes.NOTE, entity.blockPosition().getX(), entity.blockPosition().getY(), entity.blockPosition().getZ(), 5, 0, entity.getEyeHeight(), 0, 1);
             }
         });
         return super.finishUsingItem(pStack, pLevel, pEntityLiving);

@@ -59,7 +59,7 @@
 		},
 		"animation.skeleton_gladiator.walk": {
 			"loop": true,
-			"animation_length": 0.8,
+			"animation_length": 1.08,
 			"bones": {
 				"bipedRightArm": {
 					"rotation": {
@@ -67,12 +67,16 @@
 							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						},
-						"0.4": {
+						"0.36": {
 							"vector": [25, 0, 0],
 							"easing": "easeInSine"
 						},
-						"0.8": {
+						"0.72": {
 							"vector": [-25, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.08": {
+							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						}
 					}
@@ -83,12 +87,16 @@
 							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						},
-						"0.4": {
+						"0.36": {
 							"vector": [-25, 0, 0],
 							"easing": "easeInSine"
 						},
-						"0.8": {
+						"0.72": {
 							"vector": [25, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.08": {
+							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						}
 					}
@@ -99,12 +107,16 @@
 							"vector": [0, 0, 0],
 							"easing": "easeInQuad"
 						},
-						"0.4": {
+						"0.36": {
 							"vector": [35, 0, 0],
 							"easing": "easeInSine"
 						},
-						"0.8": {
+						"0.72": {
 							"vector": [-35, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.08": {
+							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						}
 					}
@@ -115,12 +127,16 @@
 							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						},
-						"0.4": {
+						"0.36": {
 							"vector": [-35, 0, 0],
 							"easing": "easeInSine"
 						},
-						"0.8": {
+						"0.72": {
 							"vector": [35, 0, 0],
+							"easing": "easeInSine"
+						},
+						"1.08": {
+							"vector": [0, 0, 0],
 							"easing": "easeInSine"
 						}
 					}

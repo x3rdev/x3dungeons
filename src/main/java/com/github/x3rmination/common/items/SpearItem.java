@@ -107,11 +107,6 @@ public class SpearItem extends TieredItem implements IVanishable {
     }
 
     @Override
-    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType equipmentSlot) {
-        return equipmentSlot == EquipmentSlotType.MAINHAND ? this.spearAttributes : super.getDefaultAttributeModifiers(equipmentSlot);
-    }
-
-    @Override
     public int getEnchantmentValue() {
         return 1;
     }

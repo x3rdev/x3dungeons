@@ -156,6 +156,7 @@ public class GladiatorSkeletonRenderer extends ExtendedGeoEntityRenderer<Gladiat
                 }
             } else if (shieldFlag) {
                 matrixStack.translate(0.0, 0.125, 0);
+                matrixStack.scale(-1, 0, 0);
             }
         }
     }

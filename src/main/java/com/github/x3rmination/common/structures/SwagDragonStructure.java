@@ -1,7 +1,10 @@
 package com.github.x3rmination.common.structures;
 
 import com.github.x3rmination.X3DUNGEONS;
+import com.github.x3rmination.core.registry.EntityInit;
+import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.Rotation;
@@ -11,6 +14,7 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.Heightmap;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
@@ -20,6 +24,7 @@ import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.Template;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
+import java.util.List;
 import java.util.Random;
 
 public class SwagDragonStructure extends StructureBase<NoFeatureConfig> {
@@ -31,6 +36,15 @@ public class SwagDragonStructure extends StructureBase<NoFeatureConfig> {
     @Override
     public Structure.IStartFactory<NoFeatureConfig> getStartFactory() {
         return SwagDragonStructure.Start::new;
+    }
+
+    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
+            new MobSpawnInfo.Spawners(EntityInit.GLADIATOR_SKELETON.get(), 100, 1, 1)
+    );
+
+    @Override
+    public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
+        return STRUCTURE_MONSTERS;
     }
 
     public static class Start extends StructureStart<NoFeatureConfig> {

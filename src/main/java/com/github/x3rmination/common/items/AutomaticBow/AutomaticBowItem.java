@@ -5,11 +5,13 @@ import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.BowItem;
 import net.minecraft.item.ItemStack;
+import net.minecraft.util.Hand;
 import net.minecraft.world.World;
 
 public class AutomaticBowItem extends BowItem {
     protected int progress;
     protected int threshold;
+    private boolean autoUse;
     public AutomaticBowItem(Properties properties, int threshold) {
         super(properties);
         this.threshold = threshold;
@@ -30,7 +32,9 @@ public class AutomaticBowItem extends BowItem {
             if (progress < threshold) {
                 progress++;
             } else {
+                autoUse = true;
                 this.releaseUsing(stack, player.level, player, 0);
+                autoUse = false;
                 player.stopUsingItem();
                 progress = 0;
             }
@@ -39,7 +43,10 @@ public class AutomaticBowItem extends BowItem {
     }
 
     @Override
-    public void inventoryTick(ItemStack pStack, World pLevel, Entity pEntity, int pItemSlot, boolean pIsSelected) {
-        if(pEntity instanceof PlayerEntity && !((PlayerEntity) pEntity).isUsingItem()) ((PlayerEntity) pEntity).stopUsingItem();
+    public void releaseUsing(ItemStack pStack, World pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
+        if(!autoUse) {
+            pTimeLeft = 72000;
+        }
+        super.releaseUsing(pStack, pLevel, pEntityLiving, pTimeLeft);
     }
 }
