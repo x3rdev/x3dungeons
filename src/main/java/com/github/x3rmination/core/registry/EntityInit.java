@@ -2,8 +2,9 @@ package com.github.x3rmination.core.registry;
 
 import com.github.x3rmination.X3DUNGEONS;
 import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonEntity;
-import com.github.x3rmination.common.entities.CannonPiglin.CannonPiglinEntity;
+import com.github.x3rmination.common.entities.CasterPiglin.CasterPiglinEntity;
 import com.github.x3rmination.common.entities.Floppa.FloppaEntity;
+import com.github.x3rmination.common.entities.GiantPiglin.GiantPiglinEntity;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonEntity;
 import com.github.x3rmination.common.entities.LeanZombie.LeanZombieEntity;
 import com.github.x3rmination.common.entities.Spear.SpearEntity;
@@ -49,11 +50,17 @@ public class EntityInit {
                     .clientTrackingRange(10)
                     .build(new ResourceLocation(X3DUNGEONS.MOD_ID, "ancient_skeleton").toString()));
 
-    public static final RegistryObject<EntityType<CannonPiglinEntity>> CANNON_PIGLIN = ENTITIES.register("cannon_piglin",
-            () -> EntityType.Builder.of(CannonPiglinEntity::new, EntityClassification.MONSTER)
-                    .sized(0.6F, 1.95F)
+    public static final RegistryObject<EntityType<CasterPiglinEntity>> CASTER_PIGLIN = ENTITIES.register("caster_piglin",
+            () -> EntityType.Builder.of(CasterPiglinEntity::new, EntityClassification.MONSTER)
+                    .sized(0.7F, 1.7F)
                     .clientTrackingRange(8)
-                    .build(new ResourceLocation(X3DUNGEONS.MOD_ID, "cannon_piglin").toString()));
+                    .build(new ResourceLocation(X3DUNGEONS.MOD_ID, "caster_piglin").toString()));
+
+    public static final RegistryObject<EntityType<GiantPiglinEntity>> GIANT_PIGLIN = ENTITIES.register("giant_piglin",
+            () -> EntityType.Builder.of(GiantPiglinEntity::new, EntityClassification.MONSTER)
+                    .sized(1.7F, 4F)
+                    .clientTrackingRange(8)
+                    .build(new ResourceLocation(X3DUNGEONS.MOD_ID, "giant_piglin").toString()));
 
     public static final RegistryObject<EntityType<SweepProjectileEntity>> SWEEP_PROJECTILE = ENTITIES.register("sweep_projectile",
             () -> EntityType.Builder.<SweepProjectileEntity>of(SweepProjectileEntity::new, EntityClassification.MISC)

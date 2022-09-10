@@ -28,8 +28,6 @@ import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.*;
 import net.minecraft.world.server.ServerBossInfo;
 import net.minecraft.world.server.ServerWorld;
-import org.lwjgl.system.CallbackI;
-import org.w3c.dom.ranges.Range;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
@@ -91,7 +89,7 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
         this.setItemSlot(EquipmentSlotType.LEGS, legStack);
         this.setItemSlot(EquipmentSlotType.FEET, bootStack);
         this.setItemSlot(EquipmentSlotType.MAINHAND, new ItemStack(ItemInit.ANCIENT_SWORD.get()));
-        this.setDropChance(EquipmentSlotType.MAINHAND, 0.0F);
+        this.setDropChance(EquipmentSlotType.MAINHAND, 2.0F);
     }
 
 
@@ -147,6 +145,16 @@ public class AncientSkeletonEntity extends MonsterEntity implements IAnimatable 
     protected void customServerAiStep() {
         this.bossEvent.setPercent(this.getHealth() / this.getMaxHealth());
         super.customServerAiStep();
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+        if(this.entityData.get(PERFORM_ATTACK_0_ANIM).equals(Boolean.TRUE)
+        || this.entityData.get(PERFORM_ATTACK_1_ANIM).equals(Boolean.TRUE)
+        || this.entityData.get(PERFORM_ATTACK_2_ANIM).equals(Boolean.TRUE)) {
+            this.setDeltaMovement(0,0,0);
+        }
     }
 
     private void spawnAttack1Particles(ServerWorld serverWorld) {

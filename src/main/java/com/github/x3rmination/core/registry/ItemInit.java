@@ -7,12 +7,12 @@ import com.github.x3rmination.common.items.Artifacts.*;
 import com.github.x3rmination.common.items.Artifacts.attribute.CompactAttribute;
 import com.github.x3rmination.common.items.AutomaticBow.*;
 import com.github.x3rmination.common.items.BoneFlute.BoneFluteItem;
-import com.github.x3rmination.common.items.PiglinCannonItem;
+import com.github.x3rmination.common.items.ExplorerBanner;
+import com.github.x3rmination.common.items.GoldenShield.GoldenShield;
 import com.github.x3rmination.common.items.SpearItem;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.ai.attributes.Attributes;
 import net.minecraft.item.*;
-import net.minecraft.util.text.TranslationTextComponent;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.registries.DeferredRegister;
@@ -67,9 +67,6 @@ public class ItemInit {
     public static final RegistryObject<Item> ANCIENT_SWORD = ITEMS.register("ancient_sword",
             () -> new AncientSwordItem(new Item.Properties().tab(ModItemTab.instance).durability(1000).fireResistant().setISTER(() -> AncientSwordRenderer::new)));
 
-    public static final RegistryObject<Item> PIGLIN_CANNON = ITEMS.register("piglin_cannon",
-            () -> new PiglinCannonItem(new Item.Properties().tab(ModItemTab.instance)));
-
     public static final RegistryObject<Item> GLADIATOR_SKELETON_SPAWN_EGG = ITEMS.register("gladiator_skeleton_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityInit.GLADIATOR_SKELETON, 0xc4c4c4, 0x9da4a8, (new Item.Properties()).tab(ModItemTab.instance)));
 
@@ -82,6 +79,15 @@ public class ItemInit {
     public static final RegistryObject<Item> FLOPPA_SPAWN_EGG = ITEMS.register("floppa_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityInit.FLOPPA, 0xbd8a3e, 0xdb9225, (new Item.Properties()).tab(ModItemTab.instance)));
 
+    public static final RegistryObject<Item> CASTER_PIGLIN_SPAWN_EGG = ITEMS.register("caster_piglin_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityInit.CASTER_PIGLIN, 0x994940, 0xf9f3a4, (new Item.Properties()).tab(ModItemTab.instance)));
+
+    public static final RegistryObject<Item> EXPLORER_BANNER = ITEMS.register("explorer_banner",
+            () -> new ExplorerBanner(new Item.Properties().tab(ModItemTab.instance)));
+
+    public static final RegistryObject<Item> GOLDEN_SHIELD = ITEMS.register("golden_shield",
+            () -> new GoldenShield(new Item.Properties().tab(ModItemTab.instance)));
+
     // ARTIFACTS
 
 //    public static final RegistryObject<Item> TEST_ARTIFACT = ARTIFACTS.register("test_artifact",
@@ -92,9 +98,6 @@ public class ItemInit {
 
     public static final RegistryObject<Item> SHIELD_OF_THE_DWARVEN_LORDS = ARTIFACTS.register("shield_of_the_dwarven_lords",
             () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.ARMOR, "name", 2, AttributeModifier.Operation.ADDITION)));
-
-    public static final RegistryObject<Item> BOW_OF_ELVEN_CHERRYWOOD = ARTIFACTS.register("bow_of_elven_cherrywood",
-            () -> new BowOfElvenCherrywoodItem(new Item.Properties().tab(ModItemTab.instance)));
 
     public static final RegistryObject<Item> PENDANT_OF_HOLINESS = ARTIFACTS.register("pendant_of_holiness",
             () -> new PendantOfHolinessItem(new Item.Properties().tab(ModItemTab.instance)));
@@ -122,8 +125,9 @@ public class ItemInit {
     public static final RegistryObject<Item> BOOTS_OF_LEVITATION = ARTIFACTS.register("boots_of_levitation",
             () -> new BootsOfLevitationItem(new Item.Properties().tab(ModItemTab.instance)));
 
-    public static final RegistryObject<Item> ANGEL_WINGS = ARTIFACTS.register("angel_wings",
-            () -> new AngelWingItem(new Item.Properties().tab(ModItemTab.instance)));
+    //Not obtainable
+//    public static final RegistryObject<Item> ANGEL_WINGS = ARTIFACTS.register("angel_wings",
+//            () -> new AngelWingItem(new Item.Properties().tab(ModItemTab.instance)));
 
     public static class ModItemTab extends ItemGroup {
         public static final ModItemTab instance = new ModItemTab(ItemGroup.TABS.length, X3DUNGEONS.MOD_ID);

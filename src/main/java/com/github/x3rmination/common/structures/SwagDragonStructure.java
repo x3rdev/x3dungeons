@@ -4,10 +4,7 @@ import com.github.x3rmination.X3DUNGEONS;
 import com.github.x3rmination.core.registry.EntityInit;
 import com.google.common.collect.ImmutableList;
 import com.mojang.datafixers.util.Either;
-import net.minecraft.entity.EntityType;
-import net.minecraft.util.Direction;
 import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.Rotation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
 import net.minecraft.util.math.vector.Vector3i;
@@ -39,12 +36,17 @@ public class SwagDragonStructure extends StructureBase<NoFeatureConfig> {
     }
 
     private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
-            new MobSpawnInfo.Spawners(EntityInit.GLADIATOR_SKELETON.get(), 100, 1, 1)
+            new MobSpawnInfo.Spawners(EntityInit.GLADIATOR_SKELETON.get(), 1, 1, 10)
     );
 
     @Override
     public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
         return STRUCTURE_MONSTERS;
+    }
+
+    @Override
+    public boolean getDefaultRestrictsSpawnsToInside() {
+        return true;
     }
 
     public static class Start extends StructureStart<NoFeatureConfig> {

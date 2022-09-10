@@ -15,7 +15,6 @@ import javax.annotation.Nullable;
 import java.util.List;
 
 @Mod.EventBusSubscriber(modid = X3DUNGEONS.MOD_ID)
-
 public class OrbOfInhibitionItem extends ArtifactItem {
 
     public OrbOfInhibitionItem(Properties properties, CompactAttribute... compactAttribute) {

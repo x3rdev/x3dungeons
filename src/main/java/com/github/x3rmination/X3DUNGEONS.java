@@ -1,19 +1,24 @@
 package com.github.x3rmination;
 
 import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonRenderer;
-import com.github.x3rmination.common.entities.CannonPiglin.CannonPiglinRenderer;
+import com.github.x3rmination.common.entities.CasterPiglin.CasterPiglinRenderer;
 import com.github.x3rmination.common.entities.Floppa.FloppaRenderer;
+import com.github.x3rmination.common.entities.GiantPiglin.GiantPiglinRenderer;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonRenderer;
 import com.github.x3rmination.common.entities.LeanZombie.LeanZombieRenderer;
 import com.github.x3rmination.common.entities.Spear.SpearRenderer;
 import com.github.x3rmination.common.entities.SweepProjectile.SweepProjectileRenderer;
 import com.github.x3rmination.common.items.AutomaticBow.AutomaticBowItem;
 import com.github.x3rmination.common.items.BoneFlute.BoneFluteItem;
+import com.github.x3rmination.common.items.GoldenShield.GoldOverlay;
+import com.github.x3rmination.common.items.GoldenShield.GoldenShield;
 import com.github.x3rmination.common.items.SpearItem;
 import com.github.x3rmination.core.event.ModEvents;
 import com.github.x3rmination.core.registry.*;
 import com.mojang.serialization.Codec;
 import net.minecraft.block.Block;
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemModelsProperties;
 import net.minecraft.util.ResourceLocation;
@@ -100,14 +105,18 @@ public class X3DUNGEONS {
     }
 
     private void doClientStuff(final FMLClientSetupEvent event) {
-
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SPEAR.get(), SpearRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.SWEEP_PROJECTILE.get(), SweepProjectileRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.GLADIATOR_SKELETON.get(), GladiatorSkeletonRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.ANCIENT_SKELETON.get(), AncientSkeletonRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityInit.CANNON_PIGLIN.get(), CannonPiglinRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.CASTER_PIGLIN.get(), CasterPiglinRenderer::new);
+        RenderingRegistry.registerEntityRenderingHandler(EntityInit.GIANT_PIGLIN.get(), GiantPiglinRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.LEAN_ZOMBIE.get(), LeanZombieRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.FLOPPA.get(), FloppaRenderer::new);
+        for (Map.Entry<String, PlayerRenderer> entry : Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().entrySet()) {
+            PlayerRenderer render = entry.getValue();
+            render.addLayer(new GoldOverlay(render));
+        }
         event.enqueueWork(() -> {
             for(RegistryObject<Item> registryObject : ItemInit.ITEMS.getEntries()) {
                 if(registryObject.get() instanceof SpearItem) {
@@ -126,6 +135,9 @@ public class X3DUNGEONS {
                 }
                 if(registryObject.get() instanceof AutomaticBowItem || registryObject.get() instanceof BoneFluteItem) {
                     ItemModelsProperties.register(registryObject.get(), new ResourceLocation(X3DUNGEONS.MOD_ID, "pulling"), (stack, world, livingEntity) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
+                }
+                if(registryObject.get() instanceof GoldenShield) {
+                    ItemModelsProperties.register(registryObject.get(), new ResourceLocation(X3DUNGEONS.MOD_ID, "blocking"), (stack, world, livingEntity) -> livingEntity != null && livingEntity.isUsingItem() && livingEntity.getUseItem() == stack ? 1.0F : 0.0F);
                 }
             }
         });
@@ -178,7 +190,9 @@ public class X3DUNGEONS {
         }
         if(event.getScale() < 0.5) {
             event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_ZOMBIE_DUNGEON);
+            event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_PIGLIN_CAMP);
         }
+
     }
 
     private static Method GETCODEC_METHOD;
@@ -203,6 +217,7 @@ public class X3DUNGEONS {
             Map<Structure<?>, StructureSeparationSettings> tempMap = new HashMap<>(serverWorld.getChunkSource().generator.getSettings().structureConfig());
             tempMap.putIfAbsent(StructureInit.SWAG_DRAGON.get(), DimensionStructuresSettings.DEFAULTS.get(StructureInit.SWAG_DRAGON.get()));
             tempMap.putIfAbsent(StructureInit.ZOMBIE_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(StructureInit.ZOMBIE_DUNGEON.get()));
+            tempMap.putIfAbsent(StructureInit.PIGLIN_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(StructureInit.PIGLIN_CAMP.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }

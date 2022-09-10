@@ -1,4 +1,4 @@
-package com.github.x3rmination.common.entities.CannonPiglin;
+package com.github.x3rmination.common.entities.GiantPiglin;
 
 import com.github.x3rmination.X3DUNGEONS;
 import net.minecraft.util.ResourceLocation;
@@ -10,21 +10,21 @@ import software.bernie.geckolib3.model.provider.data.EntityModelData;
 
 import javax.annotation.Nullable;
 
-public class CannonPiglinModel extends AnimatedGeoModel {
+public class GiantPiglinModel extends AnimatedGeoModel {
 
     @Override
     public ResourceLocation getModelLocation(Object object) {
-        return new ResourceLocation(X3DUNGEONS.MOD_ID, "geo/cannon_piglin.geo.json");
+        return new ResourceLocation(X3DUNGEONS.MOD_ID, "geo/giant_piglin.geo.json");
     }
 
     @Override
     public ResourceLocation getTextureLocation(Object object) {
-        return new ResourceLocation(X3DUNGEONS.MOD_ID, "textures/entity/cannon_piglin.png");
+        return new ResourceLocation(X3DUNGEONS.MOD_ID, "textures/entity/giant_piglin.png");
     }
 
     @Override
     public ResourceLocation getAnimationFileLocation(Object animatable) {
-        return new ResourceLocation(X3DUNGEONS.MOD_ID, "animations/entity/cannon_piglin.animation.json");
+        return new ResourceLocation(X3DUNGEONS.MOD_ID, "animations/entity/giant_piglin.animation.json");
     }
 
     @Override
