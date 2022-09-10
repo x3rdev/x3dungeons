@@ -6,60 +6,106 @@
         "min": 1,
         "max": 3
       },
-      "bonus_rolls": 1,
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "minecraft:netherite_pickaxe"
+          "name": "minecraft:netherite_pickaxe",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:netherite_scrap"
+          "name": "minecraft:netherite_scrap",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 3
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:netherite_chestplate"
+          "name": "minecraft:netherite_chestplate",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
         },
         {
           "type": "minecraft:item",
-          "name": "x3dungeons:golden_shield"
-        }
-      ],
-      "functions": [
-        {
-          "function": "minecraft:set_damage",
-          "damage": {
-            "min": 0,
-            "max": 1000
-          }
+          "name": "x3dungeons:golden_shield",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 1
+            }
+          ]
         }
       ]
     },
     {
       "rolls": {
         "min": 1,
-        "max": 1
+        "max": 3
       },
-      "bonus_rolls": 0,
       "entries": [
         {
           "type": "minecraft:tag",
-          "name": "minecraft:gold_ores"
+          "name": "minecraft:gold_ores",
+          "expand": false,
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              }
+            }
+          ]
         },
         {
           "type": "minecraft:item",
-          "name": "minecraft:golden_carrot"
+          "name": "minecraft:golden_carrot",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": {
+                "min": 1,
+                "max": 4
+              }
+            }
+          ]
         },
+        {
+          "type": "minecraft:item",
+          "name": "minecraft:gold_block",
+          "functions": [
+            {
+              "function": "minecraft:set_count",
+              "count": 2
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "rolls": 1,
+      "entries": [
         {
           "type": "minecraft:tag",
-          "name": "x3dungeons:artifact"
-        },
-        {
-          "type": "minecraft:item",
-          "name": "minecraft:gold_block"
+          "name": "x3dungeons:artifact",
+          "expand": false
         }
       ]
     }
   ]
 }
-

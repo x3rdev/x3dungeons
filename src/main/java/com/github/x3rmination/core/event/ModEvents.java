@@ -3,10 +3,8 @@ package com.github.x3rmination.core.event;
 import com.github.x3rmination.X3DUNGEONS;
 import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonEntity;
 import com.github.x3rmination.common.entities.CasterPiglin.CasterPiglinEntity;
-import com.github.x3rmination.common.entities.Floppa.FloppaEntity;
 import com.github.x3rmination.common.entities.GiantPiglin.GiantPiglinEntity;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonEntity;
-import com.github.x3rmination.common.entities.LeanZombie.LeanZombieEntity;
 import com.github.x3rmination.core.registry.EntityInit;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -21,7 +19,5 @@ public class ModEvents {
         event.put(EntityInit.ANCIENT_SKELETON.get(), AncientSkeletonEntity.setCustomAttributes().build());
         event.put(EntityInit.CASTER_PIGLIN.get(), CasterPiglinEntity.setCustomAttributes().build());
         event.put(EntityInit.GIANT_PIGLIN.get(), GiantPiglinEntity.setCustomAttributes().build());
-        event.put(EntityInit.LEAN_ZOMBIE.get(), LeanZombieEntity.setCustomAttributes().build());
-        event.put(EntityInit.FLOPPA.get(), FloppaEntity.setCustomAttributes().build());
     }
 }

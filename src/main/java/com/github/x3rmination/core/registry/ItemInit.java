@@ -73,14 +73,11 @@ public class ItemInit {
     public static final RegistryObject<Item> ANCIENT_SKELETON_SPAWN_EGG = ITEMS.register("ancient_skeleton_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityInit.ANCIENT_SKELETON, 0xc4c4c4, 0xebce2a, (new Item.Properties()).tab(ModItemTab.instance)));
 
-    public static final RegistryObject<Item> LEAN_ZOMBIE_SPAWN_EGG = ITEMS.register("lean_zombie_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityInit.LEAN_ZOMBIE, 0x260823, 0xde18c7, (new Item.Properties()).tab(ModItemTab.instance)));
-
-    public static final RegistryObject<Item> FLOPPA_SPAWN_EGG = ITEMS.register("floppa_spawn_egg",
-            () -> new ForgeSpawnEggItem(EntityInit.FLOPPA, 0xbd8a3e, 0xdb9225, (new Item.Properties()).tab(ModItemTab.instance)));
-
     public static final RegistryObject<Item> CASTER_PIGLIN_SPAWN_EGG = ITEMS.register("caster_piglin_spawn_egg",
             () -> new ForgeSpawnEggItem(EntityInit.CASTER_PIGLIN, 0x994940, 0xf9f3a4, (new Item.Properties()).tab(ModItemTab.instance)));
+
+    public static final RegistryObject<Item> GIANT_PIGLIN_SPAWN_EGG = ITEMS.register("giant_piglin_spawn_egg",
+            () -> new ForgeSpawnEggItem(EntityInit.GIANT_PIGLIN, 0x994940, 0xf9f3a4, (new Item.Properties()).tab(ModItemTab.instance)));
 
     public static final RegistryObject<Item> EXPLORER_BANNER = ITEMS.register("explorer_banner",
             () -> new ExplorerBanner(new Item.Properties().tab(ModItemTab.instance)));
@@ -94,10 +91,10 @@ public class ItemInit {
 //            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MOVEMENT_SPEED, "name", 1, AttributeModifier.Operation.ADDITION)));
 
     public static final RegistryObject<Item> CENTAURS_AXE = ARTIFACTS.register("centaurs_axe",
-            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.ATTACK_DAMAGE, "name", 2, AttributeModifier.Operation.ADDITION)));
+            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.ATTACK_DAMAGE, null, 2, AttributeModifier.Operation.ADDITION)));
 
     public static final RegistryObject<Item> SHIELD_OF_THE_DWARVEN_LORDS = ARTIFACTS.register("shield_of_the_dwarven_lords",
-            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.ARMOR, "name", 2, AttributeModifier.Operation.ADDITION)));
+            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.ARMOR, null, 2, AttributeModifier.Operation.ADDITION)));
 
     public static final RegistryObject<Item> PENDANT_OF_HOLINESS = ARTIFACTS.register("pendant_of_holiness",
             () -> new PendantOfHolinessItem(new Item.Properties().tab(ModItemTab.instance)));
@@ -105,22 +102,19 @@ public class ItemInit {
     //sorting by effect on hoa wiki
 
     public static final RegistryObject<Item> CAPE_OF_VELOCITY = ARTIFACTS.register("cape_of_velocity",
-            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MOVEMENT_SPEED, "name", 2, AttributeModifier.Operation.ADDITION)));
+            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MOVEMENT_SPEED, null, 0.1F, AttributeModifier.Operation.MULTIPLY_BASE)));
 
     public static final RegistryObject<Item> NECKLACE_OF_SWIFTNESS = ARTIFACTS.register("necklace_of_swiftness",
-            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MOVEMENT_SPEED, "name", 1, AttributeModifier.Operation.ADDITION)));
-
-    public static final RegistryObject<Item> RING_OF_THE_WAYFARER = ARTIFACTS.register("ring_of_the_wayfarer",
-            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MOVEMENT_SPEED, "name", 1, AttributeModifier.Operation.ADDITION)));
+            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MOVEMENT_SPEED, null, 0.1F, AttributeModifier.Operation.MULTIPLY_BASE)));
 
     public static final RegistryObject<Item> VIAL_OF_LIFEBLOOD = ARTIFACTS.register("vial_of_lifeblood",
-            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MAX_HEALTH, "name", 2, AttributeModifier.Operation.ADDITION)));
+            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MAX_HEALTH, null, 2, AttributeModifier.Operation.ADDITION)));
 
     public static final RegistryObject<Item> RING_OF_VITALITY = ARTIFACTS.register("ring_of_vitality",
-            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MAX_HEALTH, "name", 1, AttributeModifier.Operation.ADDITION)));
+            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MAX_HEALTH, null, 1, AttributeModifier.Operation.ADDITION)));
 
     public static final RegistryObject<Item> RING_OF_LIFE = ARTIFACTS.register("ring_of_life",
-            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MAX_HEALTH, "name", 1, AttributeModifier.Operation.ADDITION)));
+            () -> new ArtifactItem(new Item.Properties().tab(ModItemTab.instance), new CompactAttribute(Attributes.MAX_HEALTH, null, 1, AttributeModifier.Operation.ADDITION)));
 
     public static final RegistryObject<Item> BOOTS_OF_LEVITATION = ARTIFACTS.register("boots_of_levitation",
             () -> new BootsOfLevitationItem(new Item.Properties().tab(ModItemTab.instance)));

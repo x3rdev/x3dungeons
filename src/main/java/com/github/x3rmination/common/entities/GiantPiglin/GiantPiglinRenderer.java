@@ -94,7 +94,7 @@ public class GiantPiglinRenderer extends ExtendedGeoEntityRenderer<GiantPiglinEn
     protected void preRenderItem(MatrixStack matrixStack, ItemStack item, String boneName, GiantPiglinEntity currentEntity, IBone bone) {
         if (item == this.mainHand || item == this.offHand) {
             matrixStack.mulPose(Vector3f.XP.rotationDegrees(-90.0F));
-            matrixStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
+//            matrixStack.mulPose(Vector3f.ZP.rotationDegrees(180.0F));
             matrixStack.scale(2, 2, 2);
             boolean shieldFlag = item.isShield(currentEntity) || item.getItem() instanceof ShieldItem;
             if (item == this.mainHand) {

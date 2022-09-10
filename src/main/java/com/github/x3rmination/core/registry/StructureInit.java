@@ -1,10 +1,7 @@
 package com.github.x3rmination.core.registry;
 
 import com.github.x3rmination.X3DUNGEONS;
-import com.github.x3rmination.common.structures.PiglinCampStructure;
-import com.github.x3rmination.common.structures.StructureBase;
-import com.github.x3rmination.common.structures.SwagDragonStructure;
-import com.github.x3rmination.common.structures.ZombieDungeonStructure;
+import com.github.x3rmination.common.structures.*;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
 import net.minecraft.util.registry.WorldGenRegistries;
@@ -26,13 +23,14 @@ public class StructureInit {
     public static final RegistryObject<StructureBase<NoFeatureConfig>> SWAG_DRAGON = STRUCTURES.register("swag_dragon", SwagDragonStructure::new);
     public static final RegistryObject<StructureBase<NoFeatureConfig>> ZOMBIE_DUNGEON = STRUCTURES.register("zombie_dungeon", ZombieDungeonStructure::new);
     public static final RegistryObject<StructureBase<NoFeatureConfig>> PIGLIN_CAMP = STRUCTURES.register("piglin_camp", PiglinCampStructure::new);
+    public static final RegistryObject<StructureBase<NoFeatureConfig>> PIGLIN_FORGE = STRUCTURES.register("piglin_forge", PiglinForgeStructure::new);
 
 
     public static void setupStructures() {
         setupMapSpacingAndLand(SWAG_DRAGON.get(), new StructureSeparationSettings(60,30, 915238743), true);
         setupMapSpacingAndLand(ZOMBIE_DUNGEON.get(), new StructureSeparationSettings(50,20, 1437860516), false);
         setupMapSpacingAndLand(PIGLIN_CAMP.get(), new StructureSeparationSettings(40,10, 383452451), false);
-
+        setupMapSpacingAndLand(PIGLIN_FORGE.get(), new StructureSeparationSettings(40,10, 114452251), false);
     }
 
     public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {

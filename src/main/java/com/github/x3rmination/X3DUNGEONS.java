@@ -2,10 +2,8 @@ package com.github.x3rmination;
 
 import com.github.x3rmination.common.entities.AncientSkeleton.AncientSkeletonRenderer;
 import com.github.x3rmination.common.entities.CasterPiglin.CasterPiglinRenderer;
-import com.github.x3rmination.common.entities.Floppa.FloppaRenderer;
 import com.github.x3rmination.common.entities.GiantPiglin.GiantPiglinRenderer;
 import com.github.x3rmination.common.entities.GladiatorSkeleton.GladiatorSkeletonRenderer;
-import com.github.x3rmination.common.entities.LeanZombie.LeanZombieRenderer;
 import com.github.x3rmination.common.entities.Spear.SpearRenderer;
 import com.github.x3rmination.common.entities.SweepProjectile.SweepProjectileRenderer;
 import com.github.x3rmination.common.items.AutomaticBow.AutomaticBowItem;
@@ -192,6 +190,9 @@ public class X3DUNGEONS {
             event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_ZOMBIE_DUNGEON);
             event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_PIGLIN_CAMP);
         }
+        if(event.getCategory() == Biome.Category.NETHER) {
+            event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_PIGLIN_FORGE);
+        }
 
     }
 
@@ -218,6 +219,7 @@ public class X3DUNGEONS {
             tempMap.putIfAbsent(StructureInit.SWAG_DRAGON.get(), DimensionStructuresSettings.DEFAULTS.get(StructureInit.SWAG_DRAGON.get()));
             tempMap.putIfAbsent(StructureInit.ZOMBIE_DUNGEON.get(), DimensionStructuresSettings.DEFAULTS.get(StructureInit.ZOMBIE_DUNGEON.get()));
             tempMap.putIfAbsent(StructureInit.PIGLIN_CAMP.get(), DimensionStructuresSettings.DEFAULTS.get(StructureInit.PIGLIN_CAMP.get()));
+            tempMap.putIfAbsent(StructureInit.PIGLIN_FORGE.get(), DimensionStructuresSettings.DEFAULTS.get(StructureInit.PIGLIN_FORGE.get()));
             serverWorld.getChunkSource().generator.getSettings().structureConfig = tempMap;
         }
     }
