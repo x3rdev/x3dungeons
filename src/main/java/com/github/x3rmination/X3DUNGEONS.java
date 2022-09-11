@@ -109,8 +109,6 @@ public class X3DUNGEONS {
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.ANCIENT_SKELETON.get(), AncientSkeletonRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.CASTER_PIGLIN.get(), CasterPiglinRenderer::new);
         RenderingRegistry.registerEntityRenderingHandler(EntityInit.GIANT_PIGLIN.get(), GiantPiglinRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityInit.LEAN_ZOMBIE.get(), LeanZombieRenderer::new);
-        RenderingRegistry.registerEntityRenderingHandler(EntityInit.FLOPPA.get(), FloppaRenderer::new);
         for (Map.Entry<String, PlayerRenderer> entry : Minecraft.getInstance().getEntityRenderDispatcher().getSkinMap().entrySet()) {
             PlayerRenderer render = entry.getValue();
             render.addLayer(new GoldOverlay(render));
@@ -187,7 +185,7 @@ public class X3DUNGEONS {
             }
         }
         if(event.getScale() < 0.5) {
-            event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_ZOMBIE_DUNGEON);
+//            event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_ZOMBIE_DUNGEON);
             event.getGeneration().getStructures().add(() -> StructureFeatureInit.CONFIGURED_PIGLIN_CAMP);
         }
         if(event.getCategory() == Biome.Category.NETHER) {

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " /S",
+    "/CS",
+    " /S"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:gold_ingot"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "C": {
+      "item": "minecraft:comparator"
+    }
+  },
+  "result": {
+    "item": "x3dungeons:golden_automatic_bow",
+    "count": 1
+  }
+}

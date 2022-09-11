@@ -24,7 +24,7 @@ public class GoldOverlay<T extends LivingEntity> extends LayerRenderer<T, Entity
     public void render(MatrixStack pMatrixStack, IRenderTypeBuffer pBuffer, int pPackedLight, T pLivingEntity, float pLimbSwing, float pLimbSwingAmount, float pPartialTicks, float pAgeInTicks, float pNetHeadYaw, float pHeadPitch) {
         if(pLivingEntity.getUseItem().getItem() instanceof GoldenShield) {
             IVertexBuilder ivertexbuilder = pBuffer.getBuffer(TEXTURE);
-            this.getParentModel().renderToBuffer(pMatrixStack, ivertexbuilder, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.7F);
+            this.getParentModel().renderToBuffer(pMatrixStack, ivertexbuilder, pPackedLight, OverlayTexture.NO_OVERLAY, 1.0F, 1.0F, 1.0F, 0.6F);
         }
     }
 }

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  #",
+    " W ",
+    "/  "
+  ],
+  "key": {
+    "#": {
+      "tag": "minecraft:planks"
+    },
+    "W": {
+      "item": "minecraft:wooden_sword"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "x3dungeons:wooden_spear",
+    "count": 1
+  }
+}

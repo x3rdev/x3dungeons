@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    " /S",
+    "/CS",
+    " /S"
+  ],
+  "key": {
+    "/": {
+      "item": "minecraft:diamond"
+    },
+    "S": {
+      "item": "minecraft:string"
+    },
+    "C": {
+      "item": "minecraft:comparator"
+    }
+  },
+  "result": {
+    "item": "x3dungeons:diamond_automatic_bow",
+    "count": 1
+  }
+}

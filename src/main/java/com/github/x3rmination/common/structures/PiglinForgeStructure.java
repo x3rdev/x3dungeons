@@ -39,7 +39,7 @@ public class PiglinForgeStructure extends StructureBase{
             VillageConfig villageConfig = new VillageConfig(() -> dynamicRegistryManager.registryOrThrow(Registry.TEMPLATE_POOL_REGISTRY).get(new ResourceLocation(X3DUNGEONS.MOD_ID, "piglin_forge/start_pool")), 3);
             JigsawManager.addPieces(dynamicRegistryManager, villageConfig, AbstractVillagePiece::new, chunkGenerator, templateManagerIn, centerPos, this.pieces, this.random, false, false);
 
-            this.pieces.forEach(piece -> piece.move(0, 40, 0));
+            this.pieces.forEach(piece -> piece.move(0, 70, 0));
             Vector3i structureCenter = this.pieces.get(0).getBoundingBox().getCenter();
             int xOffset = centerPos.getX() - structureCenter.getX();
             int zOffset = centerPos.getZ() - structureCenter.getZ();

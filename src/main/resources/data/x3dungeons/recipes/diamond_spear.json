@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  #",
+    " W ",
+    "/  "
+  ],
+  "key": {
+    "#": {
+      "item": "minecraft:diamond"
+    },
+    "W": {
+      "item": "minecraft:diamond_sword"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "x3dungeons:diamond_spear",
+    "count": 1
+  }
+}

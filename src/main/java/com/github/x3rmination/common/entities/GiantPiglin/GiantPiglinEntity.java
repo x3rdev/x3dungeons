@@ -47,9 +47,14 @@ public class GiantPiglinEntity extends AbstractPiglinEntity implements IAnimatab
 
     public static AttributeModifierMap.MutableAttribute setCustomAttributes() {
         return MobEntity.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 60.0D)
+                .add(Attributes.MAX_HEALTH, 260.0D)
                 .add(Attributes.MOVEMENT_SPEED, 0.3D)
                 .add(Attributes.ATTACK_DAMAGE, 10.0D);
+    }
+
+    @Override
+    public boolean fireImmune() {
+        return true;
     }
 
     @Override

@@ -1,0 +1,23 @@
+{
+  "type": "minecraft:crafting_shaped",
+  "pattern": [
+    "  #",
+    " W ",
+    "/  "
+  ],
+  "key": {
+    "#": {
+      "tag": "stone_tool_materials"
+    },
+    "W": {
+      "item": "minecraft:stone_sword"
+    },
+    "/": {
+      "item": "minecraft:stick"
+    }
+  },
+  "result": {
+    "item": "x3dungeons:stone_spear",
+    "count": 1
+  }
+}
