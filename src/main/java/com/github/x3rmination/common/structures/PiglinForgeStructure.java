@@ -31,15 +31,6 @@ public class PiglinForgeStructure extends StructureBase{
         return PiglinForgeStructure.Start::new;
     }
 
-    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
-            new MobSpawnInfo.Spawners(EntityType.PIGLIN, 1, 1, 10)
-    );
-
-    @Override
-    public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
-        return STRUCTURE_MONSTERS;
-    }
-
     public static class Start extends StructureStart<NoFeatureConfig> {
 
         public Start(Structure<NoFeatureConfig> structureIn, int chunkX, int chunkZ, MutableBoundingBox mutableBoundingBox, int referenceIn, long seedIn) {

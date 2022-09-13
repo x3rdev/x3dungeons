@@ -35,14 +35,14 @@ public class SwagDragonStructure extends StructureBase<NoFeatureConfig> {
         return SwagDragonStructure.Start::new;
     }
 
-    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
-            new MobSpawnInfo.Spawners(EntityInit.GLADIATOR_SKELETON.get(), 1, 1, 10)
-    );
-
-    @Override
-    public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
-        return STRUCTURE_MONSTERS;
-    }
+//    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
+//            new MobSpawnInfo.Spawners(EntityInit.GLADIATOR_SKELETON.get(), 1, 1, 10)
+//    );
+//
+//    @Override
+//    public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
+//        return STRUCTURE_MONSTERS;
+//    }
 
     @Override
     public boolean getDefaultRestrictsSpawnsToInside() {
