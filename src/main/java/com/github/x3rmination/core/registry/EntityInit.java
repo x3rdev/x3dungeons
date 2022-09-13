@@ -55,4 +55,6 @@ public class EntityInit {
                     .updateInterval(20)
                     .build(new ResourceLocation(X3DUNGEONS.MOD_ID, "sweep_projectile").toString()));
 
+
+
 }
