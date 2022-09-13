@@ -1,6 +1,9 @@
 package com.github.x3rmination.common.structures;
 
 import com.github.x3rmination.X3DUNGEONS;
+import com.github.x3rmination.core.registry.EntityInit;
+import com.google.common.collect.ImmutableList;
+import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -8,11 +11,14 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
+import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
 import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
+
+import java.util.List;
 
 public class PiglinForgeStructure extends StructureBase{
 
@@ -23,6 +29,15 @@ public class PiglinForgeStructure extends StructureBase{
     @Override
     public Structure.IStartFactory getStartFactory() {
         return PiglinForgeStructure.Start::new;
+    }
+
+    private static final List<MobSpawnInfo.Spawners> STRUCTURE_MONSTERS = ImmutableList.of(
+            new MobSpawnInfo.Spawners(EntityType.PIGLIN, 1, 1, 10)
+    );
+
+    @Override
+    public List<MobSpawnInfo.Spawners> getDefaultSpawnList() {
+        return STRUCTURE_MONSTERS;
     }
 
     public static class Start extends StructureStart<NoFeatureConfig> {
@@ -44,7 +59,7 @@ public class PiglinForgeStructure extends StructureBase{
             int xOffset = centerPos.getX() - structureCenter.getX();
             int zOffset = centerPos.getZ() - structureCenter.getZ();
             for(StructurePiece structurePiece : this.pieces){
-                structurePiece.move(xOffset, 0, zOffset);
+                structurePiece.move(xOffset, -7, zOffset);
             }
             this.calculateBoundingBox();
         }
