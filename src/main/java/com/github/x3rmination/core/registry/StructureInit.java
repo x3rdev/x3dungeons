@@ -27,10 +27,10 @@ public class StructureInit {
 
 
     public static void setupStructures() {
-        setupMapSpacingAndLand(SWAG_DRAGON.get(), new StructureSeparationSettings(60,30, 915238743), true);
+        setupMapSpacingAndLand(SWAG_DRAGON.get(), new StructureSeparationSettings(100,60, 915238743), true);
         setupMapSpacingAndLand(ZOMBIE_DUNGEON.get(), new StructureSeparationSettings(50,20, 1437860516), false);
-        setupMapSpacingAndLand(PIGLIN_CAMP.get(), new StructureSeparationSettings(40,10, 383452451), false);
-        setupMapSpacingAndLand(PIGLIN_FORGE.get(), new StructureSeparationSettings(40,10, 114452251), true);
+        setupMapSpacingAndLand(PIGLIN_CAMP.get(), new StructureSeparationSettings(70,30, 383452451), false);
+        setupMapSpacingAndLand(PIGLIN_FORGE.get(), new StructureSeparationSettings(40,30, 114452251), true);
     }
 
     public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {

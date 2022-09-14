@@ -24,8 +24,6 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
-import net.minecraft.item.Item.Properties;
-
 public class SpearItem extends TieredItem implements IVanishable {
 
     private final Multimap<Attribute, AttributeModifier> spearAttributes;
@@ -34,7 +32,8 @@ public class SpearItem extends TieredItem implements IVanishable {
     public SpearItem(IItemTier tier, Properties properties) {
         super(tier, properties.durability(tier.getUses()));
         ImmutableMultimap.Builder<Attribute, AttributeModifier> builder = ImmutableMultimap.builder();
-        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", tier.getAttackDamageBonus() + 5, AttributeModifier.Operation.ADDITION));
+        float attackDamage = tier.getAttackDamageBonus() + 2.5F;
+        builder.put(Attributes.ATTACK_DAMAGE, new AttributeModifier(BASE_ATTACK_DAMAGE_UUID, "Tool modifier", attackDamage, AttributeModifier.Operation.ADDITION));
         builder.put(Attributes.ATTACK_SPEED, new AttributeModifier(BASE_ATTACK_SPEED_UUID, "Tool modifier", -2.9F, AttributeModifier.Operation.ADDITION));
         this.maxUseDuration = 10000;
         this.spearAttributes = builder.build();
@@ -116,6 +115,10 @@ public class SpearItem extends TieredItem implements IVanishable {
         return super.getTier();
     }
 
+    @Override
+    public Multimap<Attribute, AttributeModifier> getDefaultAttributeModifiers(EquipmentSlotType pEquipmentSlot) {
+        return pEquipmentSlot == EquipmentSlotType.MAINHAND ? this.spearAttributes : super.getDefaultAttributeModifiers(pEquipmentSlot);
+    }
 
     @Override
     public boolean canApplyAtEnchantingTable(ItemStack stack, Enchantment enchantment) {
