@@ -1,7 +1,6 @@
 package com.github.x3rmination.common.entities.Spear;
 
 import com.github.x3rmination.X3DUNGEONS;
-import com.github.x3rmination.common.entities.Spear.SpearEntity;
 import com.mojang.blaze3d.matrix.MatrixStack;
 import com.mojang.blaze3d.vertex.IVertexBuilder;
 import net.minecraft.client.renderer.entity.model.EntityModel;

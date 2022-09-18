@@ -1,5 +1,6 @@
 package com.github.x3rmination.core.registry;
 
+import com.github.x3rmination.core.config.X3DUNGEONSConfig;
 import com.github.x3rmination.X3DUNGEONS;
 import com.github.x3rmination.common.structures.*;
 import com.google.common.collect.ImmutableList;
@@ -27,10 +28,10 @@ public class StructureInit {
 
 
     public static void setupStructures() {
-        setupMapSpacingAndLand(SWAG_DRAGON.get(), new StructureSeparationSettings(100,60, 915238743), true);
+        setupMapSpacingAndLand(SWAG_DRAGON.get(), new StructureSeparationSettings(X3DUNGEONSConfig.swag_dragon_max_seperation.get(), X3DUNGEONSConfig.swag_dragon_min_seperation.get(), 915238743), true);
         setupMapSpacingAndLand(ZOMBIE_DUNGEON.get(), new StructureSeparationSettings(50,20, 1437860516), false);
-        setupMapSpacingAndLand(PIGLIN_CAMP.get(), new StructureSeparationSettings(70,30, 383452451), false);
-        setupMapSpacingAndLand(PIGLIN_FORGE.get(), new StructureSeparationSettings(40,30, 114452251), true);
+        setupMapSpacingAndLand(PIGLIN_CAMP.get(), new StructureSeparationSettings(X3DUNGEONSConfig.piglin_camp_max_seperation.get(), X3DUNGEONSConfig.piglin_camp_min_seperation.get(), 383452451), false);
+        setupMapSpacingAndLand(PIGLIN_FORGE.get(), new StructureSeparationSettings(X3DUNGEONSConfig.piglin_forge_max_seperation.get(), X3DUNGEONSConfig.piglin_forge_min_seperation.get(), 114452251), true);
     }
 
     public static <F extends Structure<?>> void setupMapSpacingAndLand(F structure, StructureSeparationSettings structureSeparationSettings, boolean transformSurroundingLand) {

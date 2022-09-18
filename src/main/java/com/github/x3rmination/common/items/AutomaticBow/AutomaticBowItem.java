@@ -49,6 +49,7 @@ public class AutomaticBowItem extends BowItem {
     public void releaseUsing(ItemStack pStack, World pLevel, LivingEntity pEntityLiving, int pTimeLeft) {
         if(!autoUse) {
             pTimeLeft = 72000;
+            progress = 0;
         }
         super.releaseUsing(pStack, pLevel, pEntityLiving, pTimeLeft);
     }

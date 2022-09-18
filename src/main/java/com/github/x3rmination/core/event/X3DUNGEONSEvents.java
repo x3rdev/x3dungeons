@@ -11,7 +11,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 
 @Mod.EventBusSubscriber(modid = X3DUNGEONS.MOD_ID, bus = Mod.EventBusSubscriber.Bus.MOD)
-public class ModEvents {
+public class X3DUNGEONSEvents {
 
     @SubscribeEvent
     public static void addEntityAttributes(EntityAttributeCreationEvent event) {

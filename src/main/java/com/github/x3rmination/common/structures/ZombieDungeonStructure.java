@@ -14,8 +14,6 @@ import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
 import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
 
-import java.util.Random;
-
 public class ZombieDungeonStructure extends StructureBase{
 
     public ZombieDungeonStructure() {

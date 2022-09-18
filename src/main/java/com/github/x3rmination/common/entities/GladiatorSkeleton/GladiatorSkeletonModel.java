@@ -2,7 +2,6 @@ package com.github.x3rmination.common.entities.GladiatorSkeleton;
 
 import com.github.x3rmination.X3DUNGEONS;
 import net.minecraft.util.ResourceLocation;
-import software.bernie.example.entity.GeoExampleEntity;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;

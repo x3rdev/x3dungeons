@@ -1,9 +1,6 @@
 package com.github.x3rmination.common.structures;
 
 import com.github.x3rmination.X3DUNGEONS;
-import com.github.x3rmination.core.registry.EntityInit;
-import com.google.common.collect.ImmutableList;
-import net.minecraft.entity.EntityType;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.util.math.MutableBoundingBox;
@@ -11,14 +8,11 @@ import net.minecraft.util.math.vector.Vector3i;
 import net.minecraft.util.registry.DynamicRegistries;
 import net.minecraft.util.registry.Registry;
 import net.minecraft.world.biome.Biome;
-import net.minecraft.world.biome.MobSpawnInfo;
 import net.minecraft.world.gen.ChunkGenerator;
 import net.minecraft.world.gen.feature.NoFeatureConfig;
 import net.minecraft.world.gen.feature.jigsaw.JigsawManager;
 import net.minecraft.world.gen.feature.structure.*;
 import net.minecraft.world.gen.feature.template.TemplateManager;
-
-import java.util.List;
 
 public class PiglinForgeStructure extends StructureBase{
 

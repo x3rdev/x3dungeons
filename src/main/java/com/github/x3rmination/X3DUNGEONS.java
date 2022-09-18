@@ -11,10 +11,10 @@ import com.github.x3rmination.common.items.BoneFlute.BoneFluteItem;
 import com.github.x3rmination.common.items.GoldenShield.GoldOverlay;
 import com.github.x3rmination.common.items.GoldenShield.GoldenShield;
 import com.github.x3rmination.common.items.SpearItem;
-import com.github.x3rmination.core.event.ModEvents;
+import com.github.x3rmination.core.config.X3DUNGEONSConfig;
+import com.github.x3rmination.core.event.X3DUNGEONSEvents;
 import com.github.x3rmination.core.registry.*;
 import com.mojang.serialization.Codec;
-import net.minecraft.block.Block;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.entity.PlayerRenderer;
 import net.minecraft.entity.EntitySpawnPlacementRegistry;
@@ -33,22 +33,21 @@ import net.minecraft.world.gen.settings.DimensionStructuresSettings;
 import net.minecraft.world.gen.settings.StructureSeparationSettings;
 import net.minecraft.world.server.ServerWorld;
 import net.minecraftforge.common.MinecraftForge;
-import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.event.world.BiomeLoadingEvent;
 import net.minecraftforge.event.world.WorldEvent;
 import net.minecraftforge.eventbus.api.EventPriority;
 import net.minecraftforge.eventbus.api.IEventBus;
-import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.InterModComms;
+import net.minecraftforge.fml.ModLoadingContext;
 import net.minecraftforge.fml.RegistryObject;
 import net.minecraftforge.fml.client.registry.RenderingRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.ObfuscationReflectionHelper;
+import net.minecraftforge.fml.config.ModConfig;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModEnqueueEvent;
 import net.minecraftforge.fml.event.lifecycle.InterModProcessEvent;
-import net.minecraftforge.fml.event.server.FMLServerStartingEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
@@ -92,7 +91,9 @@ public class X3DUNGEONS {
         StructureInit.STRUCTURES.register(modEventBus);
 
         forgeBus.register(this);
-        forgeBus.register(new ModEvents());
+        forgeBus.register(new X3DUNGEONSEvents());
+
+        ModLoadingContext.get().registerConfig(ModConfig.Type.COMMON, X3DUNGEONSConfig.SPEC, "x3dungeons-common.toml");
 
         forgeBus.addListener(EventPriority.NORMAL, this::addDimensionalSpacing);
         forgeBus.addListener(EventPriority.HIGH, this::biomeModification);

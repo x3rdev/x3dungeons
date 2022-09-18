@@ -12,7 +12,6 @@ import net.minecraft.client.renderer.model.ItemCameraTransforms;
 import net.minecraft.client.renderer.model.ModelRenderer;
 import net.minecraft.inventory.EquipmentSlotType;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ShieldItem;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.math.vector.Vector3f;
 import software.bernie.example.client.DefaultBipedBoneIdents;
