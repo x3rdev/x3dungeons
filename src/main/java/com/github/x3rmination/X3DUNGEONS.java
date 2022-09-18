@@ -59,7 +59,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.stream.Collectors;
 
-// The value here should match an entry in the META-INF/mods.toml file
 @Mod("x3dungeons")
 public class X3DUNGEONS {
 
