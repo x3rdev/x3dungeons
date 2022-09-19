@@ -67,3 +67,9 @@ side = "BOTH"
     versionRange = "[3.0.79,)"
     ordering = "NONE"
     side = "BOTH"
+[[dependencies.x3dungeons]]
+    modId = "curios"
+    mandatory = true
+    versionRange = "[4.0.8.2,)"
+    ordering = "NONE"
+    side = "BOTH"
