@@ -2,15 +2,11 @@ package com.github.x3rmination.common.items.Artifacts;
 
 import com.github.x3rmination.X3DUNGEONS;
 import com.github.x3rmination.common.items.Artifacts.attribute.CompactAttribute;
-import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.LivingEntity;
 import net.minecraft.entity.player.PlayerEntity;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.CompoundNBT;
 import net.minecraft.util.SoundEvents;
-import net.minecraft.util.text.ITextComponent;
-import net.minecraft.util.text.TranslationTextComponent;
-import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.fml.common.Mod;
 import top.theillusivec4.curios.api.SlotContext;
@@ -19,7 +15,6 @@ import top.theillusivec4.curios.common.capability.CurioItemCapability;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
-import java.util.List;
 
 @Mod.EventBusSubscriber(modid = X3DUNGEONS.MOD_ID)
 public class AngelWingItem extends ArtifactItem {
@@ -27,11 +22,11 @@ public class AngelWingItem extends ArtifactItem {
         super(properties, compactAttribute);
     }
 
-    @Override
-    public void appendHoverText(ItemStack pStack, @Nullable World pLevel, List<ITextComponent> pTooltip, ITooltipFlag pFlag) {
-        super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
-        pTooltip.add(new TranslationTextComponent("x3dungeons.angel_wings.tooltip"));
-    }
+//    @Override
+//    public void appendHoverText(ItemStack pStack, @Nullable World pLevel, List<ITextComponent> pTooltip, ITooltipFlag pFlag) {
+//        super.appendHoverText(pStack, pLevel, pTooltip, pFlag);
+//        pTooltip.add(new TranslationTextComponent("x3dungeons.angel_wings.tooltip"));
+//    }
 
     @Nullable
     @Override

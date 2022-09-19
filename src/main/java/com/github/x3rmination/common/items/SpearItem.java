@@ -24,6 +24,7 @@ import net.minecraft.util.Hand;
 import net.minecraft.util.math.BlockPos;
 import net.minecraft.world.World;
 
+
 public class SpearItem extends TieredItem implements IVanishable {
 
     private final Multimap<Attribute, AttributeModifier> spearAttributes;

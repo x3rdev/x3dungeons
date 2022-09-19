@@ -15,9 +15,13 @@ import net.minecraft.util.SoundCategory;
 import net.minecraft.util.SoundEvents;
 import net.minecraft.util.math.BlockRayTraceResult;
 import net.minecraft.util.math.EntityRayTraceResult;
+import net.minecraft.util.math.MathHelper;
 import net.minecraft.util.math.RayTraceResult;
 import net.minecraft.util.math.vector.Vector3d;
 import net.minecraft.world.World;
+import net.minecraftforge.client.ForgeHooksClient;
+import net.minecraftforge.fml.ModList;
+import net.minecraftforge.fml.ModLoader;
 import net.minecraftforge.fml.network.NetworkHooks;
 import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.PlayState;
@@ -38,7 +42,6 @@ public class SweepProjectileEntity extends AbstractArrowEntity implements IAnima
 
     public SweepProjectileEntity(LivingEntity pShooter, World pLevel) {
         super(EntityInit.SWEEP_PROJECTILE.get(), pShooter, pLevel);
-//        this.setNoPhysics(true);
     }
 
     @Override
@@ -100,5 +103,31 @@ public class SweepProjectileEntity extends AbstractArrowEntity implements IAnima
     @Override
     protected float getWaterInertia() {
         return 1;
+    }
+
+    // Epic fight fixes
+
+    @Override
+    public void shoot(double pX, double pY, double pZ, float pVelocity, float pInaccuracy) {
+        Vector3d vector3d = (new Vector3d(pX, pY, pZ)).normalize().add(this.random.nextGaussian() * (double)0.0075F * (double)pInaccuracy, this.random.nextGaussian() * (double)0.0075F * (double)pInaccuracy, this.random.nextGaussian() * (double)0.0075F * (double)pInaccuracy).scale((double)pVelocity).normalize();
+        this.setDeltaMovement(vector3d);
+        float f = MathHelper.sqrt(getHorizontalDistanceSqr(vector3d));
+        this.yRot = (float)(MathHelper.atan2(vector3d.x, vector3d.z) * (double)(180F / (float)Math.PI));
+        this.xRot = (float)(MathHelper.atan2(vector3d.y, (double)f) * (double)(180F / (float)Math.PI));
+        this.yRotO = this.yRot;
+        this.xRotO = this.xRot;
+    }
+
+    @Override
+    public void shootFromRotation(Entity pShooter, float pX, float pY, float pZ, float pVelocity, float pInaccuracy) {
+        if(pShooter instanceof PlayerEntity && ModList.get().isLoaded("epicfight")) {
+            pX = MathHelper.wrapDegrees(pX - 180);
+        }
+        float f = -MathHelper.sin(pY * ((float)Math.PI / 180F)) * MathHelper.cos(pX * ((float)Math.PI / 180F));
+        float f1 = -MathHelper.sin((pX + pZ) * ((float)Math.PI / 180F));
+        float f2 = MathHelper.cos(pY * ((float)Math.PI / 180F)) * MathHelper.cos(pX * ((float)Math.PI / 180F));
+        this.shoot(f, f1, f2, pVelocity, pInaccuracy);
+        Vector3d vector3d = pShooter.getDeltaMovement();
+        this.setDeltaMovement(this.getDeltaMovement().add(vector3d.x, pShooter.isOnGround() ? 0.0D : vector3d.y, vector3d.z));
     }
 }

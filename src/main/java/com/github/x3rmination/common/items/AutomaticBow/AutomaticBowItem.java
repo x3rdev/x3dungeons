@@ -36,7 +36,7 @@ public class AutomaticBowItem extends BowItem {
                 progress++;
             } else {
                 autoUse = true;
-                this.releaseUsing(stack, player.level, player, 0);
+                this.releaseUsing(stack, player.level, player, 100);
                 autoUse = false;
                 player.stopUsingItem();
                 progress = 0;

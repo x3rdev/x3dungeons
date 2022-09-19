@@ -38,8 +38,8 @@ import java.util.EnumSet;
 public class GiantPiglinEntity extends AbstractPiglinEntity implements IAnimatable {
 
     private AnimationFactory animationFactory = new AnimationFactory(this);
-    private static final DataParameter<Boolean> PERFORM_ATTACK_0_ANIM = EntityDataManager.defineId(AncientSkeletonEntity.class, DataSerializers.BOOLEAN);
-    private static final DataParameter<Boolean> PERFORM_ATTACK_1_ANIM = EntityDataManager.defineId(AncientSkeletonEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PERFORM_ATTACK_0_ANIM = EntityDataManager.defineId(GiantPiglinEntity.class, DataSerializers.BOOLEAN);
+    private static final DataParameter<Boolean> PERFORM_ATTACK_1_ANIM = EntityDataManager.defineId(GiantPiglinEntity.class, DataSerializers.BOOLEAN);
 
     public GiantPiglinEntity(EntityType<? extends AbstractPiglinEntity> entityType, World world) {
         super(entityType, world);
