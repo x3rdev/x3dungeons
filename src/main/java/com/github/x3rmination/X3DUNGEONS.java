@@ -56,7 +56,6 @@ public class X3DUNGEONS {
         modEventBus.addListener(this::setup);
         modEventBus.addListener(this::enqueueIMC);
         modEventBus.addListener(this::processIMC);
-//        modEventBus.addListener(X3DUNGEONSClientEvents::doClientStuff);
 
         // Items
         ItemInit.ITEMS.register(modEventBus);

@@ -1,6 +1,5 @@
 buildscript {
     repositories {
-        // These repositories are only for Gradle plugins, put any other repositories in the repository block further below
         maven { url = 'https://repo.spongepowered.org/maven' }
         maven { url = 'https://maven.minecraftforge.net' }
         maven { url = 'https://maven.parchmentmc.org' }
@@ -21,7 +20,7 @@ apply plugin: 'net.minecraftforge.gradle'
 apply plugin: 'org.parchmentmc.librarian.forgegradle'
 
 group = 'com.github.x3rmination'
-version = '1.8.2'
+version = '1.8.3'
 archivesBaseName = 'x3dungeons'
 
 java.toolchain.languageVersion = JavaLanguageVersion.of(8)

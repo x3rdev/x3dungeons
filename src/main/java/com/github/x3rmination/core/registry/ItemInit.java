@@ -20,8 +20,6 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 public class ItemInit {
 
-    // ADD EPIC FIGHT MOD INTEGRATION, AVAILABLE ON CURSEFORGE PAGE
-
     public static final DeferredRegister<Item> ITEMS = DeferredRegister.create(ForgeRegistries.ITEMS, X3DUNGEONS.MOD_ID);
     public static final DeferredRegister<Item> ARTIFACTS = DeferredRegister.create(ForgeRegistries.ITEMS, X3DUNGEONS.MOD_ID);
 
